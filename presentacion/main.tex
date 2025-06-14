@@ -1,0 +1,316 @@
+\documentclass{beamer}
+
+% Theme selection (you will need to choose or create a theme that matches your desired look)
+%\usetheme{Madrid} % Example theme, you might want to explore others like CambridgeUS, Boadilla, etc.
+% Or create a custom theme
+% \usecolortheme{beaver} % Example color theme
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} % Required for including images
+
+% Custom commands or settings can go here to match the UNAD branding
+% For example, setting specific colors:
+% \definecolor{unadblue}{RGB}{X,Y,Z} % Replace X,Y,Z with actual RGB values
+% \setbeamercolor{frametitle}{fg=unadblue}
+
+\title[Transformada de Laplace]{WebConferencia Tarea 4 – Solución de Ecuaciones Diferenciales por Transformada de Laplace}
+\author{Hugo López Aranda \\ Jonathan Alberto Cervantes}
+\institute{Escuela de Ciencias Básicas, Tecnología e Ingeniería (ECBTI) \\ UNAD - Universidad Nacional Abierta y a Distancia}
+\date{12 de junio de 2025}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+    \titlepage
+    \begin{center}
+        % You might want to include the UNAD logo here if you have it as an image file
+        % \includegraphics[width=0.3\textwidth]{unad_logo.png}
+    \end{center}
+\end{frame}
+
+% Table of Contents (optional)
+\begin{frame}{Tabla de Contenidos}
+    \tableofcontents
+\end{frame}
+
+% Introduction to Laplace Transform
+\section{Transformada de Laplace}
+\begin{frame}{Transformada de Laplace}
+    \begin{itemize}
+        \item Es una transformación matemática denotada por $\mathcal{L}$.
+        \item Convierte funciones $f(t)$, dependientes del tiempo, en funciones $F(s)$, definidas en un dominio complejo.
+        \item Convierte ecuaciones diferenciales en ecuaciones algebraicas, facilitando su solución.
+        \item Aplicaciones en ingeniería: análisis y diseño de sistemas de control, transferencia de calor, y análisis de circuitos.
+        \item Se define formalmente como: $\mathcal{L}[f(t)]=\int_{0}^{\infty}f(t)e^{-st}dt$.
+    \end{itemize}
+\end{frame}
+
+% Inverse Laplace Transform
+\begin{frame}{Transformada Inversa de Laplace}
+    \begin{itemize}
+        \item También conocida como Anti transformada.
+        \item Toma funciones $F(s)$ y las retorna a funciones $f(t)$.
+        \item Denotada por $\mathcal{L}^{-1}$.
+    \end{itemize}
+\end{frame}
+
+% Example 1: Laplace Transform of e^(at)
+\begin{frame}{Ejemplo 1: Transformada de Laplace}
+    \centering
+    \textbf{Si $f(t)=e^{at}$ entonces:}
+    \[
+    \mathcal{L}[f(t)]=\mathcal{L}[e^{at}]=\int_{0}^{\infty}(e^{at}*e^{-st})dt=\frac{1}{s-a}=F(s) \text{ }
+    \]
+    \textbf{En conclusión:} $\mathcal{L}[e^{at}]=\frac{1}{s-a}$ 
+\end{frame}
+
+% Example 2: Inverse Laplace Transform
+\begin{frame}{Ejemplo 2: Transformada Inversa de Laplace}
+    \centering
+    \textbf{Si $F(s)=\frac{1}{s-a}$ entonces:}
+    \[
+    \mathcal{L}^{-1}[F(s)]=\mathcal{L}^{-1}\left[\frac{1}{s-a}\right]=e^{at}=f(t) \text{ }
+    \]
+    \textbf{En conclusión:} $\mathcal{L}^{-1}\left[\frac{1}{s-a}\right]=e^{at}$ 
+\end{frame}
+
+% Table of Transforms
+\section{Tabla de Transformadas}
+\begin{frame}{Tabla de Transformadas de Laplace}
+    \centering
+    Puede usar un recurso tecnológico para buscar más transformadas.
+
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Transformada de Laplace}
+        \begin{itemize}
+            \item $\mathcal{L}[kf(t)]=k\mathcal{L}[f(t)]$ (k constante) 
+            \item $\mathcal{L}[f(t)\pm g(t)]=\mathcal{L}[f(t)]\pm\mathcal{L}[g(t)]$ (Linealidad) 
+            \item $\mathcal{L}\{1\}=\frac{1}{s}$ 
+            \item $\mathcal{L}\{e^{kt}\}=\frac{1}{s-k}$ 
+            \item $\mathcal{L}\{t^{n}\}=\frac{n!}{s^{n+1}}$ 
+            \item $\mathcal{L}\{t^{n}e^{kt}\}=\frac{n!}{(s-k)^{n+1}}$ 
+            \item $\mathcal{L}[k]=\frac{k}{s}$ 
+            \item $\mathcal{L}\{sen~kt\}=\frac{k}{s^{2}+k^{2}}$ 
+            \item $\mathcal{L}\{cos~kt\}=\frac{s}{s^{2}+k^{2}}$ 
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Transformada de Laplace Inversa}
+        \begin{itemize}
+            \item $\mathcal{L}^{-1}\{\frac{1}{s}\}=1$ 
+            \item $\mathcal{L}^{-1}\{\frac{1}{s-k}\}=e^{kt}$ 
+            \item $\mathcal{L}^{-1}\{\frac{n!}{s^{n+1}}\}=t^{n}$ 
+            \item $\mathcal{L}^{-1}\{\frac{n!}{(s-k)^{n+1}}\}=t^{n}e^{kt}$ 
+            \item $\mathcal{L}^{-1}\{\frac{k}{s^{2}+k^{2}}\}=sen~kt$ 
+            \item $\mathcal{L}^{-1}\{\frac{s}{s^{2}+k^{2}}\}=cos~kt$ 
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% Example 3: Calculating Laplace Transform
+\section{Ejemplos de Transformada de Laplace}
+\begin{frame}{Ejemplo 3: Calcular $\mathcal{L}[f(t)]$ para $f(t)=5e^{2t}+e^{t}+2$}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Proposición Enunciado o Expresión Matemática}
+        \begin{itemize}
+            \item $f(t)=5e^{2t}+e^{t}+2$ 
+            \item $\mathcal{L}[f(t)]=\mathcal{L}[5e^{2t}+e^{t}+2]$ 
+            \item $\mathcal{L}[5e^{2t}+e^{t}+2] = \mathcal{L}[5e^{2t}]+\mathcal{L}[e^{t}]+\mathcal{L}[2]$ 
+            \item $\mathcal{L}[5e^{2t}]=5\mathcal{L}[e^{2t}]=5*\frac{1}{s-2}=\frac{5}{s-2}$ 
+            \item $\mathcal{L}[e^{t}]=\frac{1}{s-1}$ 
+            \item $\mathcal{L}[2]=\frac{2}{s}$ 
+            \item $\mathcal{L}[f(t)]=\frac{5}{s-2}+\frac{1}{s-1}+\frac{2}{s}$ 
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Razón o Explicación}
+        \begin{itemize}
+            \item Función dada 
+            \item Aplicación del símbolo de Transformada 
+            \item Aplicación propiedad de linealidad 
+            \item Aplicación de propiedades de la tabla 
+            \item Aplicación de propiedades de la tabla 
+            \item Aplicación de propiedades de la tabla 
+            \item Consolidación 
+        \end{itemize}
+    \end{columns}
+    \textbf{Conclusión:} $\mathcal{L}[f(t)]=\frac{5}{s-2}+\frac{1}{s-1}+\frac{2}{s}=F(s)$ 
+\end{frame}
+
+% Example 4: Calculating Laplace Transform with sin and cos
+\begin{frame}{Ejemplo 4: Calcular $\mathcal{L}[f(t)]$ para $f(t)=t^{2}+3~sin(\pi t)+4t~cos(\pi t)$}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Proposición Enunciado o Expresión Matemática}
+        \begin{itemize}
+            \item $f(t)=t^{2}+3~sin(\pi t)+4t~cos(\pi t)$ 
+            \item $\mathcal{L}[f(t)]=\mathcal{L}[t^{2}+3~sin(\pi t)+4t~cos(\pi t)]$ 
+            \item $\mathcal{L}[t^{2}+3~sin(\pi t)+4t~cos(\pi t)] = \mathcal{L}[t^{2}]+\mathcal{L}[3~sin~\pi t]+\mathcal{L}[4t~cos~\pi t]$ 
+            \item $\mathcal{L}[t^{2}]=\frac{2!}{s^{2+1}}=\frac{2}{s^{3}}$ 
+            \item $\mathcal{L}[3~sin~\pi t]=3\frac{\pi}{s^{2}+\pi^{2}}=\frac{3\pi}{s^{2}+\pi^{2}}$ 
+            \item $\mathcal{L}[4t~cos~\pi t]=4\frac{s^{2}-\pi^{2}}{(s^{2}+\pi^{2})^{2}}=\frac{4(s^{2}-\pi^{2})}{(s^{2}+\pi^{2})^{2}}$ 
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Razón o Explicación}
+        \begin{itemize}
+            \item Función dada 
+            \item Aplicación del símbolo de Transformada 
+            \item Aplicación propiedad de linealidad 
+            \item Aplicación de propiedades. 
+            \item Aplicación de propiedades. 
+            \item Aplicación de propiedades. 
+        \end{itemize}
+    \end{columns}
+    \textbf{Conclusión:} $\mathcal{L}[f(t)]=\frac{2}{s^{3}}+\frac{3\pi}{s^{2}+\pi^{2}}+\frac{4(s^{2}-\pi^{2})}{(s^{2}+\pi^{2})^{2}}=F(s)$ 
+\end{frame}
+
+% Examples of Inverse Laplace Transform
+\section{Ejemplos de Transformada Inversa de Laplace}
+\begin{frame}{Transformada Inversa o Anti transformada de Laplace $\mathcal{L}^{-1}$}
+    \begin{itemize}
+        \item Otro concepto importante es la Transformada inversa de Laplace o Anti transformada que toma funciones $F(s)$ y las retorna a funciones $f(t)$.
+    \end{itemize}
+\end{frame}
+
+% Example 5: Inverse Laplace Transform of k/(s^2+k^2)
+\begin{frame}{Ejemplo 5: Calcular $\mathcal{L}^{-1}[F(s)]$ para $F(s)=[\frac{k}{s^{2}+k^{2}}]$}
+    \centering
+    \textbf{Proposición Enunciado o Expresión Matemática}
+    \[
+    \mathcal{L}^{-1}[F(s)]=\mathcal{L}^{-1}\left[\frac{k}{s^{2}+k^{2}}\right]=sin~kt \text{ }
+    \]
+    \textbf{Razón o Explicación}
+    Lo anterior se da porque $\mathcal{L}[sin~kt]=\frac{k}{s^{2}+k^{2}}$ 
+    \[
+    \mathcal{L}^{-1}[\mathcal{L}[sin~kt]]=\mathcal{L}^{-1}\left[\frac{k}{s^{2}+k^{2}}\right] \text{ }
+    \]
+    \[
+    sin~kt=\mathcal{L}^{-1}\left[\frac{k}{s^{2}+k^{2}}\right] \rightarrow \mathcal{L}^{-1}\left[\frac{k}{s^{2}+k^{2}}\right]=sin~kt \text{ }
+    \]
+    \textbf{Conclusión:} $f(t)=sin~kt$ 
+\end{frame}
+
+% Example 6: Inverse Laplace Transform of 2/(s+3)
+\begin{frame}{Ejemplo 6: Calcular $\mathcal{L}^{-1}[\frac{2}{s+3}]$}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Proposición Enunciado o Expresión Matemática}
+        \begin{itemize}
+            \item $F(s)=[\frac{2}{s+3}]$ 
+            \item $\mathcal{L}^{-1}[\frac{2}{s+3}]$ 
+            \item $2\mathcal{L}^{-1}[\frac{1}{s+3}]$ 
+            \item $2\mathcal{L}^{-1}[\frac{1}{s+3}]=2e^{-3t}$ 
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Razón o Explicación}
+        \begin{itemize}
+            \item Función dada 
+            \item Aplicación del símbolo de Transformada inversa. 
+            \item Aplicación de Linealidad para la Transformada inversa 
+            \item Se busca en la tabla de transformadas una expresión parecida a $\mathcal{L}^{-1}[\frac{1}{s+3}]$, la cual es $\mathcal{L}[e^{at}]=\frac{1}{s-a}=\frac{1}{s-(-3)}=\frac{1}{s+3}$ donde $a=(-3)$ 
+        \end{itemize}
+    \end{columns}
+    \textbf{Conclusión:} $f(t)=2e^{-3t}$ 
+\end{frame}
+
+% Example 7: Inverse Laplace Transform of 1/s^5
+\begin{frame}{Ejemplo 7: Calcular $\mathcal{L}^{-1}[\frac{1}{s^{5}}]$}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Proposición Enunciado o Expresión Matemática}
+        \begin{itemize}
+            \item $F(s)=[\frac{1}{s^{5}}]$ 
+            \item $\mathcal{L}^{-1}[\frac{1}{s^{5}}]$ 
+            \item $\mathcal{L}^{-1}[\frac{1}{s^{(4+1)}}]$ 
+            \item $\mathcal{L}^{-1}[\frac{1}{s^{(4+1)}}]=\mathcal{L}^{-1}[\frac{4!}{s^{(4+1)}}*\frac{1}{4!}]$ 
+            \item $\frac{1}{4!}\mathcal{L}^{-1}[\frac{4!}{s^{(4+1)}}]$ 
+            \item $\frac{1}{24}t^{4}$ 
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Razón o Explicación}
+        \begin{itemize}
+            \item Función dada 
+            \item Aplicación del símbolo de Transformada inversa. 
+            \item Se busca en la tabla de transformadas y anti transformadas una expresión que se parezca a $\mathcal{L}^{-1}[\frac{1}{s^{(4+1)}}]$, la cual es $\mathcal{L}[t^{n}]=\frac{n!}{s^{n+1}}=\frac{4!}{s^{4+1}}$ donde $n=4$ 
+            \item Multiplicando y a su vez dividiendo entre 4! 
+            \item Aplicando linealidad para $\mathcal{L}^{-1}$ 
+        \end{itemize}
+    \end{columns}
+    \textbf{Conclusión:} $f(t)=\frac{1}{24}t^{4}$ 
+\end{frame}
+
+% Partial Fractions
+\section{Fracciones Parciales}
+\begin{frame}{Fracciones Parciales}
+    \begin{itemize}
+        \item Las fracciones parciales son una técnica algebraica que se utiliza para descomponer una fracción racional compleja en una suma de fracciones más simples.
+        \item Esto facilita integraciones y transformadas inversas como la de Laplace.
+    \end{itemize}
+\end{frame}
+
+% Example 8: Partial Fraction Decomposition
+\begin{frame}{Ejemplo 8: Descomponer en fracciones parciales la expresión $\frac{1}{s(s+2)}$}
+    \centering
+    Es válido usar un recurso tecnológico para hacer la descomposición. 
+    \textbf{Resultado final:}
+    \[
+    \frac{1}{s(s+2)}=\frac{1}{2s}-\frac{1}{2(s+2)} \text{ }
+    \]
+\end{frame}
+
+% Example 9: Application of Partial Fractions in Inverse Laplace Transform
+\begin{frame}{Ejemplo 9: Aplicación de las fracciones parciales en la Transformada inversa de Laplace.}
+    \centering
+    \textbf{Hallar la transformada inversa de Laplace para la siguiente función:} $F(s)=\frac{1}{s(s+2)}$ 
+
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Proposición Enunciado o Expresión Matemática}
+        \begin{itemize}
+            \item $F(s)=\frac{1}{s(s+2)}$
+            \item $\frac{1}{s(s+2)} = \frac{1}{2s}-\frac{1}{2(s+2)}$
+            \item $\mathcal{L}^{-1}\left[\frac{1}{2s}-\frac{1}{2(s+2)}\right]$
+            \item $\frac{1}{2}\mathcal{L}^{-1}\left[\frac{1}{s}\right]-\frac{1}{2}\mathcal{L}^{-1}\left[\frac{1}{s+2}\right]$
+            \item $\frac{1}{2}(1) - \frac{1}{2}e^{-2t}$
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Razón o Explicación}
+        \begin{itemize}
+            \item Enunciado a resolver 
+            \item Aplicación de fracciones parciales con recurso tecnológico 
+            \item Aplicación del símbolo de Transformada inversa sobre las fracciones parciales 
+            \item Aplicación de linealidad 
+            \item De la tabla de transformadas inversas sabemos que $\mathcal{L}^{-1}[\frac{1}{s}]=1$ y $\mathcal{L}^{-1}[\frac{1}{s+2}]=e^{-2t}$ 
+        \end{itemize}
+    \end{columns}
+    \textbf{Conclusión:} $f(t)=\frac{1}{2}-\frac{1}{2}e^{-2t}$ 
+\end{frame}
+
+% Suggestion for Exercise 5
+\section{Sugerencias}
+\begin{frame}{Sugerencia para el Ejercicio 5 Tarea 4}
+    \textbf{Anotación:} Para el desarrollo del Ejercicio 5 de su Tarea 4 puede trabajar con los videos propuestos.
+    \textbf{Videos Propuestos:}
+    \begin{itemize}
+        \item \url{https://www.youtube.com/watch?v=t8JdvZC63bY} 
+        \item \url{https://www.youtube.com/watch?v=tv_5Khz4GJs} 
+        \item \url{https://www.youtube.com/watch?v=LpQ5EkWLsDc} 
+    \end{itemize}
+    O buscar algún video referido al tema de aplicaciones matemáticas en el canal de la UNAD: \url{https://www.youtube.com/universidadunad} 
+\end{frame}
+
+% Thank You slide
+\begin{frame}
+    \centering
+    \Huge ¡GRACIAS! 
+    \vspace{1cm}
+    \Large \url{www.unad.edu.co} 
+    \vspace{0.5cm}
+    % \includegraphics[width=0.4\textwidth]{unad_social_media.png} % Replace with actual social media icons if you have them as an image
+\end{frame}
+
+\end{document}
