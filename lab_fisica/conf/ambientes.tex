@@ -1,0 +1,71 @@
+\usepackage{mdframed}
+\usepackage{environ} % usado nas definições
+\theoremstyle{definition}
+
+% Definição:
+\mdfdefinestyle{definitionSty}{backgroundcolor=physorg!10, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin =0, outermargin =0}
+\newcounter{definitionCounter}[section]
+%\numberwithin{definitionCounter}{section}
+\newmdtheoremenv[style=definitionSty]{definicao}[definitionCounter]{Defini\c{c}\~{a}o}
+
+% Teorema:
+\mdfdefinestyle{theoremSty}{backgroundcolor=physorg!10, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0}
+\newcounter{theoremCounter}[section] 
+%\numberwithin{theoremCounter}{section}
+\newmdtheoremenv[style=theoremSty]{teorema}[theoremCounter]{Teorema}
+
+% Propriedade:
+\mdfdefinestyle{theoremSty}{backgroundcolor=physorg!6, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0}
+\newcounter{propertyCounter}[section] 
+%\numberwithin{propertyCounter}{section}
+\newmdtheoremenv[style=theoremSty]{propriedade}[propertyCounter]{Propriedade}
+
+% Lema
+\mdfdefinestyle{lemaSty}{backgroundcolor=physorg!8, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0}
+\newcounter{lemaCounter}[section] 
+%\numberwithin{lemaCounter}{section}
+\newmdtheoremenv[style=lemaSty]{lema}[lemaCounter]{Lema}
+
+% Demonstração:
+\mdfdefinestyle{demonstrationSty}{backgroundcolor=physorg!20, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin =+1cm, outermargin =+1cm}
+\newcounter{demonstrationCounter}[section]
+%\numberwithin{demonstrationCounter}{section}
+\newmdtheoremenv[style=demonstrationSty]{demonstracao}[demonstrationCounter]{Demonstra\c{c}\~{a}o}
+
+% Axioma:
+\mdfdefinestyle{axiomSty}{backgroundcolor=physorg!10, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0}
+\newcounter{axiomCounter}[section] 
+%\numberwithin{axiomCounter}{section}
+\newmdtheoremenv[style=axiomSty]{axioma}[axiomCounter]{Axioma}
+
+% Exemplo:
+\mdfdefinestyle{exampleSty}{backgroundcolor=physorg!10, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex,  innermargin =+0.5cm, outermargin =+0.5cm}
+\newcounter{exampleCounter}[section]
+%\numberwithin{exampleCounter}{section}
+\newmdtheoremenv[style=exampleSty]{exemplo}[exampleCounter]{Exemplo}
+
+% Nota:
+\mdfdefinestyle{noteSty}{backgroundcolor=physorg!5, linewidth=1pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=2ex, innerbottommargin=2ex, innermargin =+0.5cm, outermargin =+0.5cm}
+\newcounter{noteCounter}[section]
+%\numberwithin{noteCounter}{section}
+\newmdtheoremenv[style=noteSty]{nota}[noteCounter]{Nota}
+
+% Argumento:
+\mdfdefinestyle{argumentSty}{backgroundcolor=physorg!10, linewidth=0pt, innerleftmargin=3ex, innerrightmargin=3ex, innertopmargin=1ex, innerbottommargin=1ex, innermargin=0, outermargin=0} 
+\newmdtheoremenv[style=argumentSty]{argumento}{}
+
+% Citação com autor:
+
+\renewenvironment{quotation}
+  {\small\list{}{\rightmargin=0.1cm \leftmargin=4cm \topsep=1.5\baselineskip}%
+   \item\relax}
+  {\endlist}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\newline
+  \hbox{}\nobreak #1 %
+  \hfil\parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{citacao}[1]
+  {\savebox\mybox{#1}\begin{quotation}}
+  {\signed{\usebox\mybox}\end{quotation}}

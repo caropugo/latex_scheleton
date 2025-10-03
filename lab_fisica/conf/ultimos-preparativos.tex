@@ -1,0 +1,29 @@
+\renewcommand\Authsep{, \quad }
+\renewcommand\Authand{, }
+\renewcommand\Authands{, \quad }
+
+\renewcommand*{\Affilfont}{\normalsize\normalfont}
+\renewcommand*{\Authfont}{\scshape}
+
+\title{%
+    \vspace{-15mm}%
+    \fontsize{20pt}{26pt}%
+    \selectfont\textbf{\tituloportugues} \\
+    \vspace{1ex}
+    \fontsize{14pt}{20pt}\selectfont\textbf{\color{gray}\tituloingles}%
+} % Título.
+\date{}
+
+
+% Trecho para evitar conflito entre pacotes Verbatim e TikZ (https://tex.stackexchange.com/questions/352297/tikz-error-some-package-has-redefined-the-meaning-of-the-math-mode-dollar-sign):
+
+\usepackage{everypage}
+
+\makeatletter
+\AtBeginDocument{%
+  \AddEverypageHook{%
+    \small    
+    \catcodetable  \catcodetable@latex
+  }%
+}
+\makeatother
