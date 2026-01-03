@@ -1,0 +1,893 @@
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{float}
+%\usepackage{courier}
+\usepackage{booktabs}
+%\usepackage[a4paper, margin=2.2cm]{geometry}
+
+\ifprintunizar
+	\usepackage[a4paper, 
+				tmargin=45mm, 
+				lmargin=40mm, 
+				textwidth=130mm, 
+				textheight=210mm, 
+				headsep=5mm]{geometry}
+\else
+	\usepackage[a4paper,
+				tmargin=2.2cm, 
+				lmargin=2.2cm,
+				rmargin=2.2cm, 
+				bmargin=1.0in]{geometry}
+\fi
+
+%\usepackage[letterpaper,margin=2.2cm]{geometry}
+%\usepackage[pdftex]{graphicx} %% loaded twice
+\usepackage[nodayofweek]{datetime}
+\usepackage{environ}
+%\usepackage{subfig}
+\usepackage{subcaption}
+\usepackage[labelfont=bf]{caption}
+\usepackage{acronym}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+\usepackage{empheq}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{extarrows}
+\usepackage[makeroom]{cancel} % cross-out terms in equations
+\usepackage{xifthen}
+\usepackage{twoopt}
+\usepackage{wasysym}
+\usepackage{fancyhdr}
+\usepackage{siunitx}
+\usepackage{ifplatform}
+%\usepackage[nottoc]{tocbibind}
+%\usepackage{patchcmd}
+%\usepackage{parskip}
+\usepackage{fix-cm} % mandatory for Package cover 
+\usepackage{titlesec} % mandatory for Package cover
+%\PassOptionsToPackage{pagestyles}{titlesec}
+%\PassOptionsToPackage{clearempty}{titlesec}
+%\PassOptionsToPackage{explicit}{titlesec}
+\usepackage[T1]{fontenc} % mandatory for Package cover 
+\usepackage{adjustbox} % mandatory for alt colour cover
+\usepackage[superscript, biblabel, nomove]{cite} % citation package and style -> https://tex.stackexchange.com/questions/79591/superscripts-in-bibliography-with-bibtex#79599
+\usepackage[protrusion=true,expansion]{microtype} % install cm-super -> https://tex.stackexchange.com/questions/88368/how-do-i-invoke-cm-super#88374
+%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+%\usepackage{lmodern}
+
+\ifx\printabletext\trueValue
+	\usepackage[monochrome]{xcolor}
+\else
+	\usepackage[dvipsnames, table]{xcolor}
+	\usepackage{xcolor}
+%	\usepackage{color, colortbl}
+\fi
+
+\ifdefined\mainmatter
+	\usepackage{tocbasic} % mainmatter style book
+	\usepackage{xpatch} % mainmatter style book
+\fi
+
+% activate morewrites if you need more space to write
+\usepackage{morewrites} % https://www.ctan.org/pkg/morewrites
+\usepackage[most]{tcolorbox}
+\usepackage[none]{hyphenat} % do not split words at the en of line
+\usepackage{afterpage}
+\usepackage{xfrac}
+\usepackage{nicefrac} % diagonal fractions --> https://tex.stackexchange.com/questions/3372/how-do-i-typeset-arbitrary-fractions-like-the-standard-symbol-for-5-%C2%BD
+\usepackage{newfloat} % float environment for equation listing
+%\usepackage[subfigure]{tocloft}
+\usepackage{tocloft}
+\usepackage{etoolbox}
+\usepackage{everyshi}
+\usepackage{atbegshi}
+\usepackage{atveryend}
+\usepackage{yfonts}
+\usepackage{todonotes}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, calc}
+%\usetikzlibrary{calc}
+\usepackage[siunitx, RPvoltages]{./packages/circuitikzgit}
+\usepackage{anyfontsize}
+\usepackage{minted}
+\usepackage{array}
+\usepackage[column=O, math]{cellspace}
+\usepackage{makecell} % https://tex.stackexchange.com/questions/558937/how-to-avoid-broken-horizontal-and-vertical-lines-when-using-multirow-and-multic
+\usepackage{multirow}
+%\usepackage{bigints}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{soul}
+%\usepackage[integrals]{wasysym}
+\usepackage[bottom]{footmisc}
+\usepackage{setspace}
+\usepackage[percent]{overpic}
+\usepackage{xhfill}
+\usepackage{eqparbox}
+%\usepackage{everypage}
+%\usepackage{bophook} % important for top footnote space
+%\usepackage[printwatermark]{xwatermark}
+%\usepackage{./packages/bibspacing}
+%\usepackage[tocindentauto]{tocstyle}
+%\usetocstyle{KOMAlike} %the previous line resets it
+\usepackage{fix-cm} % Fixes warnings about missing fonts; see http://tex.stackexchange.com/questions/32378/xfrac-siunitx-gives-me-a-font-warning
+%\usepackage{bookmark} % faster updated bookmarks
+\usepackage{hyperref}
+%\usepackage{appendix}
+%\usepackage[toc,page]{appendix}
+%\usepackage{cleveref}
+\usepackage[sort=use]{glossaries}[=v4.46] % always load glossaries AFTER hyperref % https://tex.stackexchange.com/questions/290114/how-to-sort-glossaries-entries-by-alphabetical-order-then-by-order-of-appereance
+%\usepackage[sort=use]{glossaries-extra}
+%\usepackage{catoptions}
+\usepackage{./packages/catoptions}
+\usepackage{csquotes} % https://tex.stackexchange.com/questions/120722/how-to-modify-a-bibliography-style-to-surround-titles-in-quotes-in-a-bibliograph
+% https://tex.stackexchange.com/questions/64761/add-just-a-little-more-padding-to-my-table/381439
+
+% https://tex.stackexchange.com/questions/64761/add-just-a-little-more-padding-to-my-table/381439
+\cellspacetoplimit 4pt
+
+% space after figures
+%\setlength{\belowcaptionskip}{-5pt}
+
+\iftwoside
+
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ SELECTED TWO-SIDE}
+	\typeout{@@@@@@@@@@@@@}
+	
+	\makeatletter
+		\@twosidetrue
+	\makeatother
+\else
+
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ SELECTED ONE-SIDE}
+	\typeout{@@@@@@@@@@@@@}
+	
+	\makeatletter
+		\@twosidefalse
+	\makeatother
+\fi
+
+\newif\iffilepublications
+
+% set true or false to view the list of publications 
+\filepublicationstrue
+
+\iffilepublications
+
+	\makeatletter
+		\@ifpackageloaded{multibib}{\relax}{
+			\usepackage[resetlabels]{multibib} % multiple bibliography
+		}
+	\makeatother
+
+\fi
+
+\newif\ifnotwindows
+
+\ifwindows
+	% do nothing
+	\relax
+\else
+	\notwindowstrue
+\fi
+
+\newcommand{\ConfigLinksBlack}{
+	
+	\hypersetup{
+		colorlinks = true,
+		linkcolor=black,
+		citecolor=black,
+		filecolor=black,
+		urlcolor=black,
+		runcolor=black,
+		menucolor=black,
+		linkbordercolor=black,
+		citebordercolor=black,
+		filebordercolor=black,
+		urlbordercolor=black,
+		runbordercolor=black,
+		menubordercolor=black,
+		pdfpagemode=UseOutlines,
+		hypertexnames = true,
+		pdfencoding = auto, 
+		psdextra, 
+		bookmarksdepth = 4
+		bookmarks=true,
+		bookmarksopen=true,    
+		bookmarksopenlevel=0,
+		bookmarksnumbered=true,
+		plainpages=false
+	}
+}
+
+\newcommand{\ConfigLinksColours}{
+
+	% style color setup: https://tex.stackexchange.com/questions/525261/better-default-colors-for-hyperref-links
+	
+	\definecolor{blue-hyperref}{rgb}{0,0.2,0.6}
+	
+	\hypersetup{
+		colorlinks = true,
+		linkcolor=blue-hyperref,
+		citecolor=blue-hyperref,
+		filecolor=blue-hyperref,
+		urlcolor=blue-hyperref,
+		runcolor=blue-hyperref,
+		menucolor=blue-hyperref,
+		linkbordercolor=blue-hyperref,
+		citebordercolor=blue-hyperref,
+		filebordercolor=blue-hyperref,
+		urlbordercolor=blue-hyperref,
+		runbordercolor=blue-hyperref,
+		menubordercolor=blue-hyperref,
+		pdfpagemode=UseOutlines,
+		hypertexnames = true,
+		pdfencoding = auto, 
+		psdextra, 
+		bookmarksdepth = 4
+		bookmarks=true,
+		bookmarksopen=true,    
+		bookmarksopenlevel=0,
+		bookmarksnumbered=true,
+		plainpages=false
+	}
+	
+%	\hypersetup{
+%		colorlinks = true
+%		,linkcolor=NavyBlue %BrickRed
+%		,citecolor=Green
+%		,filecolor=Mulberry
+%		,urlcolor=NavyBlue
+%		,menucolor=BrickRed
+%		,runcolor=Mulberry
+%		,linkbordercolor=BrickRed
+%		,citebordercolor=Green
+%		,filebordercolor=Mulberry
+%		,urlbordercolor=NavyBlue
+%		,menubordercolor=BrickRed
+%		,runbordercolor=Mulberry
+%	}
+}
+
+\ifx\printabletext\trueValue
+
+	\ConfigLinksBlack
+
+\else
+	
+	\ifdefined\compileblack
+	
+		\ConfigLinksBlack
+	
+	\else
+	
+		\ConfigLinksColours
+	
+	\fi
+\fi
+
+\ifx\printabletext\trueValue
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ PRINTING BLACK AND WHITE TEXT}{}
+	\typeout{@@@@@@@@@@@@@}
+\else
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ PRINTING RGB TEXT}{}
+	\typeout{@@@@@@@@@@@@@}
+\fi
+
+\ifx\printableimages\trueValue
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ PRINTING BLACK AND WHITE IMAGES}{}
+	\typeout{@@@@@@@@@@@@@}
+\else 
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ PRINTING RGB IMAGES}{}
+	\typeout{@@@@@@@@@@@@@}
+\fi
+
+% https://tex.stackexchange.com/questions/525261/better-default-colors-for-hyperref-links
+
+%\hypersetup{
+%	colorlinks = true,
+%	linkcolor={[rgb]{0,0.2,0.6}},
+%	citecolor={[rgb]{0,0.6,0.2}},
+%	filecolor={[rgb]{0.8,0,0.8}},
+%	urlcolor={[rgb]{0.8,0,0.8}},
+%	runcolor={[rgb]{0.8,0,0.8}},  % defaults to filecolor but it missing an
+%	% expansion for this syntax
+%	menucolor={[rgb]{0,0.2,0.6}}, % I never set or use this, so we'll see
+%	% it to link color
+%	linkbordercolor={[rgb]{0,0.2,0.6}},
+%	citebordercolor={[rgb]{0,0.6,0.2}},
+%	filebordercolor={[rgb]{0.8,0,0.8}},
+%	urlbordercolor={[rgb]{0.8,0,0.8}},
+%	runbordercolor={[rgb]{0.8,0,0.8}},
+%	menubordercolor={[rgb]{0,0.2,0.6}},
+%	hypertexnames=false 
+%}
+
+%\hypersetup{
+%	colorlinks = true,
+%	linkcolor = {[rgb]{0,0.2,0.6}},
+%	anchorcolor = {[rgb]{0,0.2,0.6}},
+%	citecolor = {[rgb]{0,0.2,0.6}},
+%	filecolor = {[rgb]{0,0.2,0.6}},
+%	urlcolor = {[rgb]{0,0.2,0.6}},
+%	hypertexnames=false
+%}
+
+%\hypersetup{
+%	colorlinks = true,
+%	linkcolor = blue,
+%	anchorcolor = blue,
+%	citecolor = blue,
+%	filecolor = blue,
+%	urlcolor = blue,
+%	hypertexnames=false
+%}
+
+% space in glossary entries, bibspacing
+%\setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+
+% PDF compression parameters: https://latex.org/forum/viewtopic.php?t=21309
+\pdfminorversion=5
+\pdfcompresslevel=9
+\pdfobjcompresslevel=2
+\pdfinclusioncopyfonts=1
+
+\typeout{@@@@@@@@@@@@@ pdfcompresslevel=\the\pdfcompresslevel}
+\typeout{@@@@@@@@@@@@@}
+\typeout{@@@@@@@@@@@@@ pdfobjcompresslevel=\the\pdfobjcompresslevel}
+\typeout{@@@@@@@@@@@@@}
+\typeout{@@@@@@@@@@@@@ pdfminorversion=\the\pdfminorversion}
+\typeout{@@@@@@@@@@@@@}
+
+\DeclareGraphicsExtensions{.eps,.jpg,.png,.pdf}
+
+\newcommand{\keywords}{physics, resume, summary, report, phd, magnonics, quantum, simulations}
+
+% https://tex.stackexchange.com/questions/48067/pdfinfo-doesnt-appear-to-be-working#48070
+\ifpdf
+	\makeatletter
+		\AtBeginDocument{
+			\hypersetup{
+				pdftitle={\@title~\expandonce\THETITLE},
+				pdfauthor={\@author},
+				pdfkeywords={\keywords},
+				pdfproducer={\expandonce\THEAUTHOR},
+				pdfcreator={\expandonce\THEAUTHOR},
+				pdfsubject={\expandonce\THETITLE},
+				pdfinfo={
+					Title={\THETITLE},
+					Author={\THEAUTHOR},
+					Creator={\THEAUTHOR},
+					Producer={\THEAUTHOR}
+				}
+			}
+		}
+	\makeatother
+\fi
+
+\setlist[itemize]{itemsep=0.005cm}
+
+\newif\ifformat
+\formattrue
+
+% Command to avoid style expand in TOC/LOT/LOF
+\newcommand{\donotexpandstyles}[1]{
+	\AtBeginDocument{\addtocontents{#1}{\protect\formatfalse}}
+	\AtEndDocument{\addtocontents{#1}{\protect\formattrue}}
+}
+
+% Do not expand styles in table of contents
+\donotexpandstyles{toc}
+% Do not expand styles in list of tables
+\donotexpandstyles{lot}
+% Do not expand styles in list of figures
+\donotexpandstyles{lof}
+% Do not expand styles in list of equations
+\donotexpandstyles{equ}
+
+% Do not show styles on TOC/LOT/LOF, put \maybe before styled text
+\makeatletter
+\DeclareRobustCommand{\maybe}[1]{%
+	\ifformat
+		\expandafter#1%
+	\else
+		\expandafter\@firstofone
+	\fi
+}
+\makeatother
+
+% remove word Chapter at the beginning of each chapter
+%\titleformat{\chapter}[block]{\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+% https://tex.stackexchange.com/questions/62516/how-to-suppress-chapter-in-chapter-while-keeping-numbering
+\makeatletter
+\def\@makechapterhead#1{%
+	\vspace*{-19\p@}%
+	{\parindent \z@ \raggedright \normalfont
+		\ifnum \c@secnumdepth >\m@ne
+			\if@mainmatter
+				%\huge\bfseries \@chapapp\space \thechapter
+				\Huge\bfseries \thechapter.\space%
+				%\par\nobreak
+				%\vskip 20\p@
+			\fi
+		\fi
+		\interlinepenalty\@M
+		\Huge \bfseries #1\par\nobreak
+		\vskip 10\p@
+}}
+\makeatother
+
+\ifx\printableimages\trueValue
+%	\immediate\write18{chmod +x utils/convert-grayscale.sh && ./utils/convert-grayscale.sh &>/dev/null}
+	\graphicspath{{./images-grayscale/}}
+\else
+	\graphicspath{{./images/}}
+\fi
+
+% Continous footnote counter
+% https://tex.stackexchange.com/questions/10448/continuous-footnote-numbering
+\counterwithout{footnote}{chapter}
+
+%% INDENTATION REVIEW
+\newif\ifindentfirst
+\newif\ifindentall
+
+\indentfirstfalse
+\indentallfalse
+
+\def\indentspace{\hspace*{1em}}
+\def\noindentspace{\hspace*{0em}}
+
+\ifindentfirst
+
+	% START INDENT ONLY FIRST PARAGRAPH OTHER PARAGRAPHS NOT INDENT
+
+	\makeatletter
+	\def\@afterheading{%
+		\@nobreaktrue
+		\everypar{%
+			\if@nobreak
+				\@nobreakfalse
+				\clubpenalty \@M
+				\indentspace%
+			\else
+				\clubpenalty \@clubpenalty
+				\everypar{}%
+			\fi}}
+	\makeatother
+	\setlength{\parindent}{0pt}
+
+	% END INDENT ONLY FIRST PARAGRAPH OTHER PARAGRAPHS NOT INDENT
+
+\else
+
+	\ifindentall
+	
+		\setlength{\parindent}{1em}
+		
+	\else
+	
+		%% START NOT INDENT FIRST PARAGRAPH OTHER PARAGRAPHS INDENT
+		
+		\makeatletter
+		\def\@afterheading{%
+			\@nobreaktrue
+			\everypar{%
+				\if@nobreak
+					\@nobreakfalse
+					\clubpenalty \@M
+					\noindentspace%
+				\else
+					\clubpenalty \@M
+					\indentspace
+				\fi}}
+		\makeatother
+		\setlength{\parindent}{0em}
+		
+		%% END NOT INDENT FIRST PARAGRAPH OTHER PARAGRAPHS INDENT
+	
+		%% PATCH INDENT AFTER ENVIRONMENT LIST BASED
+		% https://tex.stackexchange.com/questions/112404/reliable-code-for-automatic-noindent-after-specific-environments
+		% https://tex.stackexchange.com/questions/23062/an-unexpected-value-of-clubpenalty
+		
+		\makeatletter
+		\let\nearly@afterheading\@afterheading
+		\patchcmd\nearly@afterheading
+			{\@M} % original temporary setting for \clubpenalty replaced by ...
+			{\@clubpenalty\protect\indentspace} % ... or whichever value you deem right
+			{}{}
+	
+		\newcommand*\IndentAfterEnv[1]{%
+			\AfterEndEnvironment{#1}{\par\@afterindentfalse\nearly@afterheading}}
+		
+		\newcommand*\SpaceBeforeEnv[1]{%
+			\BeforeBeginEnvironment{#1}{\par\protect\vspace*{0.5em}}}
+		\makeatother
+
+		% indent after environment
+		\IndentAfterEnv{itemize}
+		\IndentAfterEnv{enumerate}
+		
+		% mandatory for a \parskip of 0.7em
+		\SpaceBeforeEnv{itemize}
+		\SpaceBeforeEnv{enumerate}
+		
+		%% END PATCH INDENT AFTER ENVIRONMENT LIST BASED
+	\fi
+
+\fi
+%% END INDENTATION REVIEW
+
+%% START TOC STYLE
+% https://tex.stackexchange.com/questions/154646/is-there-an-easy-way-to-get-the-frontmatter-mainmatter-and-backmatter-in-a-l/154666
+% https://tex.stackexchange.com/questions/419555/remove-bold-style-for-chapter-names-in-table-of-contents
+% https://tex.stackexchange.com/questions/123774/remove-the-dots-next-to-chapter-in-memoir
+% https://tex.stackexchange.com/questions/299074/removing-number-on-toc-but-maintaining-the-position-of-the-text
+% http://www.texfaq.org/FAQ-isdef
+
+\ifdefined\mainmatter
+
+	% https://tex.stackexchange.com/questions/439926/different-style-for-backmatter-chapters-in-toc
+	% \mainmatter defined
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ mainmatter defined}
+	\typeout{@@@@@@@@@@@@@}
+	
+		% https://tex.stackexchange.com/a/511461
+	% https://tex.stackexchange.com/questions/544569/koma-toc-constant-distance-between-section-title-and-pagenumber
+	
+%	\DeclareTOCStyleEntry[%
+%		entryformat=\chapterentryformat,%
+%		pagenumberformat=\chapterentryformat,%
+%		pagenumberbox=\pagenumberboxsimple,%
+%		linefill=\dotfillcustomentryformat,%
+%		indent=0pt
+%	]{tocline}{chapter}%
+	
+%	\DeclareTOCStyleEntries[%
+%		entryformat=\sectionentryformat,%
+%		pagenumberformat=\sectionentryformat,%
+%		pagenumberbox=\pagenumberboxsimple,%
+%		linefill=\dotfillcustomentryformat,%
+%		indent=0pt
+%	]{tocline}{section}%
+	
+%	\DeclareTOCStyleEntry[%
+%		entryformat=\subsectionentryformat,%
+%		pagenumberformat=\subsectionentryformat,%
+%		pagenumberbox=\pagenumberboxsimple,%
+%		%linefill=\dotfill,%
+%		%indent=0pt
+%	]{tocline}{subsection}%
+%	
+%	\DeclareTOCStyleEntry[%
+%		pagenumberbox={\mbox}%
+%	]{tocline}{figure}%
+%	
+%	\newif\ifmainmatterintoc
+%	
+%	%	\newcommand*\pagenumberbox[1]{\mbox{\hspace{1em}#1}}
+%	\newcommand*\pagenumberboxsimple[1]{\mbox{#1}\relax}%
+%	
+%	%	\newcommand*\dotfillcustomentryformat[1]{{\ifmainmatterintoc\dotfill\else\relax\fi#1}}%
+%	
+%	\newcommand*\subsectionentryformat[1]{{\ifmainmatterintoc\relax\else\normalfont\itshape\fi#1}}%
+%	
+%	\newcommand*\sectionentryformat[1]{{\ifmainmatterintoc\normalfont\else\normalfont\itshape\fi#1}}%
+%
+%	\newcommand*\chapterentryformat[1]{{\ifmainmatterintoc\normalfont\bfseries\else\normalfont\itshape\fi#1}}%
+%	
+%	\xapptocmd\mainmatter{\addtocontents{toc}{\protect\mainmatterintoctrue}}{}{}%
+%	\xapptocmd\backmatter{\addtocontents{toc}{\protect\mainmatterintocfalse}}{}{}%
+
+\else
+
+	% \mainmatter not defined
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ mainmatter NOT defined}
+	\makeatletter
+	\typeout{@@@@@@@@@@@@@}
+	
+	\newcommand*{\enableboldchapterintoc}{%
+		
+		\addtocontents{toc}{\protect\unexpanded{\protect\unexpanded{\string\renewcommand{\protect\cftchapdotsep}{\protect\cftnodots}}}} % remove dots
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapfont}{\protect\normalfont\protect\bfseries}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchappagefont}{\protect\normalfont\protect\bfseries}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapleader}{\protect\bfseries\hfill\relax}}
+		%	\addtocontents{toc}{\string\renewcommand{\protect\cftchapleader}{\protect\bfseries\protect\cftdotfill{\protect\cftsecdotsep}}} % dot leaders in bold
+	}
+	
+	\newcommand*{\enableitalicchapterintoc}{%
+		
+		\addtocontents{toc}{\protect\unexpanded{\protect\unexpanded{\string\renewcommand{\protect\cftchapdotsep}{\protect\cftnodots}}}} % remove dots
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapfont}{\protect\normalfont\protect\itshape}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchappagefont}{\protect\normalfont\protect\itshape}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapleader}{\protect\itshape\hfill\relax}}
+	}
+	
+	\newcommand*{\disablestylechapterintoc}{%
+		
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchappagefont}{\protect\normalfont}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapfont}{\protect\normalfont}}
+		\addtocontents{toc}{\string\renewcommand{\protect\cftchapleader}{\protect\normalfont\protect\cftdotfill{\protect\cftsecdotsep}}}% 
+	}
+	
+	\newcommand{\frontmatter}{%
+		
+		\disablestylechapterintoc
+		\enableitalicchapterintoc
+		
+		\cleardoublepage
+		\pagenumbering{Roman}
+	}
+	
+	\newcommand{\mainmatter}{%
+		
+		\disablestylechapterintoc
+		\enableboldchapterintoc
+		
+		\cleardoublepage
+		\pagenumbering{arabic}
+	}
+	
+	\newcommand{\backmatter}{%
+		
+		\disablestylechapterintoc
+		\enableitalicchapterintoc
+		
+		\if@openright
+			\cleardoublepage
+		\else
+			\clearpage
+		\fi
+	}
+	
+	\makeatother
+
+\fi
+
+
+\ifdefined\mainmatter
+	% https://tex.stackexchange.com/questions/159998/changing-the-dot-size-in-the-table-of-contents
+	\makeatletter          % to set the marginpar on the left side in showframe
+	\let\Gm@vrules@mpi\Gm@vrules@mpii
+	\makeatother
+	
+	%	\newcommand\mydot[1]{\scalebox{#1}{.}}
+	%	\renewcommand\cftdot{\mydot{2}}
+	
+	%	\setcounter{tocdepth}{2}% only parts and chapters in ToC
+	
+	%	\makeatletter
+	%	
+	%	\def\@dotsep{0.072}
+	%	\newcommand*\skillmon@pagenumberbox[1]{\makebox{#1}}
+	%	\newcommand*\skillmon@numsep{0pt}
+	
+	%	\DeclareTOCStyleEntry[%
+	%			,dynnumwidth=true%
+	%			,numwidth=0pt%
+	%			,numsep=\skillmon@numsep%
+	%			,pagenumberbox=\skillmon@pagenumberbox%
+	%			]{tocline}{figures}
+	
+	\DeclareTOCStyleEntries[%
+	%		afterskip = -0.65em plus 0pt, %
+	%		numsep=\skillmon@numsep,%
+			entryformat=\chapterentryformat,%
+			pagenumberformat=\chapterentryformat,%
+			pagenumberbox=\pagenumberboxsimple,%
+	%		numwidth=0pt,%
+	%		pagenumberbox=\skillmon@pagenumberbox,%
+	%		linefill=\dotfillcustomentryformat,%
+	%		indent=0pt
+	%		dynnumwidth=true%
+	]{tocline}{chapter}%
+	
+	%	\DeclareTOCStyleEntry[%
+	%%		dynnumwidth=true,%
+	%%		numsep=\skillmon@numsep,%
+	%%		entryformat=\sectionentryformat,%
+	%%		pagenumberformat=\sectionentryformat,%
+	%%		pagenumberbox=\pagenumberboxsimple,%
+	%%		pagenumberbox=\skillmon@pagenumberbox,%
+	%%		linefill=\dotfillcustomentryformat,%
+	%		indent=0cm
+	%	]{tocline}{figure}%
+	
+	% https://tex.stackexchange.com/questions/347807/bold-chapter-with-dottedtocline-and-tocbasic
+	%	\DeclareTOCStyleEntry[beforeskip=1pt]{tocline}{chapter}
+	
+	%	https://tex.stackexchange.com/questions/16422/indentation-in-toc-and-lists-of-figures-tables
+	\setlength{\cftfigindent}{0pt}
+	
+	% 	https://tex.stackexchange.com/questions/16422/indentation-in-toc-and-lists-of-figures-tables
+	\makeatletter
+	\renewcommand\@dotsep{2}% default is 4.5
+	\renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}% Default: 1.5em/2.3em
+	\let\l@table\l@figure
+	\makeatother
+	
+	\newif\ifembackmattertoc
+	
+	\embackmattertoctrue
+	
+	\ifembackmattertoc
+	\relax%
+		\DeclareTOCStyleEntry[%
+%			raggedentrytext=true,%
+%			beforeskip=0pt plus .2pt,
+%			beforeskip=0em,%
+			dynnumwidth=true,%
+%			dynindent=true,
+%			numsep=\skillmon@numsep,%
+%			onstarthigherlevel=\LastTOCLevelWasSame,
+			entryformat=\sectionentryformat,%
+			pagenumberformat=\sectionentryformat,%
+			pagenumberbox=\pagenumberboxsimple,%
+%			pagenumberbox=\skillmon@pagenumberbox,%
+%			linefill=\dotfillcustomentryformat,%
+%			indent=1pt
+		]{tocline}{section}%
+		%	
+		\DeclareTOCStyleEntry[%
+%			raggedentrytext=true,%
+%			raggedentrytext,
+%			beforeskip=0pt plus .2pt,
+%			numwidth=0pt,%
+%			onstarthigherlevel=\LastTOCLevelWasSame,
+			dynnumwidth=true,%
+%			beforeskip=0em,%
+%			dynindent=true,
+			entryformat=\subsectionentryformat,%
+			pagenumberformat=\subsectionentryformat,%
+			pagenumberbox=\pagenumberboxsimple,%
+%			pagenumberbox=\skillmon@pagenumberbox,%
+%			pagenumberbox={\mbox}%
+%			linefill=\dotfill,%
+%			indent=1pt
+		]{tocline}{subsection}%
+	
+	\fi
+	
+	%	\DeclareTOCStyleEntry[%
+	%		dynnumwidth=true,%
+	%%		pagenumberbox=\skillmon@pagenumberbox,%
+	%	]{tocline}{figure}%
+	
+	%	\DeclareTOCStyleEntry[%
+	%		dynnumwidth=true,%
+	%		pagenumberbox=\skillmon@pagenumberbox,%
+	%	]{tocline}{equation}%
+	%	\makeatother
+	
+	%\DeclareTOCStyleEntries[
+	%entryformat=\em
+	%]{tocline}{subsection}
+	
+	%	\DeclareTOCStyleEntry[%
+	%		pagenumberbox={\mbox}%
+	%	]{tocline}{figure}%
+	%	
+	%	\makeatother
+	
+	\renewcommand\cftdotsep{2}%
+	\renewcommand{\cftsecdotsep}{2}%
+	\renewcommand{\cftsubsecdotsep}{2}%
+	
+	\newif\ifmainmatterintoc
+	
+	%	\newcommand*\pagenumberbox[1]{\mbox{\hspace{1em}#1}}
+	\newcommand*\pagenumberboxsimple[1]{\mbox{#1}\relax}%
+	
+	%	\newcommand*\dotfillcustomentryformat[1]{{\ifmainmatterintoc\dotfill\else\relax\fi#1}}%
+	
+	\newcommand*\subsectionentryformat[1]{\ifmainmatterintoc\relax#1\else\normalfont\itshape#1\fi}%
+	
+	\newcommand*\sectionentryformat[1]{\ifmainmatterintoc\normalfont#1\else\normalfont\itshape#1\fi}%
+	
+	\newcommand*\chapterentryformat[1]{\ifmainmatterintoc\normalfont\bfseries#1\else\normalfont\itshape#1\fi}%
+	
+	\xapptocmd\mainmatter{\addtocontents{toc}{\protect\mainmatterintoctrue}}{\relax}{}%
+	\xapptocmd\backmatter{\addtocontents{toc}{\protect\mainmatterintocfalse}}{\relax}{}%
+	
+	%	\renewcommand*{\tableofcontents}{\listoftoc[\contentsname]{toc}}
+	%	\DeclareTOCStyleEntries[raggedentrytext]{tocline}{section,subsection,subsubsection,paragraph,subparagraph}
+	
+	\ifembackmattertoc
+		% FIX TOC BREAK PAGE
+		% https://tex.stackexchange.com/questions/211642/allow-page-breaks-in-the-toc-after-parts
+		\makeatletter%
+		\let\old@l@subsection\l@subsection%
+		\renewcommand{\l@subsection}[2]{%
+			\old@l@subsection{#1}{#2}% Regular setting of \part in ToC
+			\pagebreak[0]%
+		}% Add a zero penalty (for possible page break)
+		\makeatother%
+	\fi
+\fi
+
+%% END TOC STYLE
+
+% https://tex.stackexchange.com/questions/323455/bold-math-in-title-but-not-in-toc
+\newcommand\AvoidBoldMathInTocFor[1]{
+	\titleformat*{#1}{\bfseries\boldmath}
+}
+
+\AvoidBoldMathInTocFor{\section}
+\AvoidBoldMathInTocFor{\subsection}
+\AvoidBoldMathInTocFor{\subsubsection}
+
+% Check twoside or oneside document
+\makeatletter
+% https://tex.stackexchange.com/questions/360785/how-do-i-check-if-a-document-is-oneside-or-twoside#360791
+\if@twoside%
+
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ TWO-SIDE DOCUMENT}
+	\typeout{@@@@@@@@@@@@@}
+	
+	% CLEAN DOUBLE PAGES ON TWOSIDE MODE
+	% https://tex.stackexchange.com/questions/62572/twoside-introduces-incorrect-linespacing-at-end-of-section
+	\raggedbottom
+	% https://stackoverflow.com/questions/491904/how-do-i-remove-blank-pages-coming-between-two-chapters-in-appendix
+	\let\cleardoublepage\clearpage
+	% END CLEAN DOUBLE PAGES ON TWOSIDE MODE
+	
+\else%
+
+	\typeout{@@@@@@@@@@@@@}
+	\typeout{@@@@@@@@@@@@@ ONE-SIDE DOCUMENT}
+	\typeout{@@@@@@@@@@@@@}
+	
+\fi%  
+
+\makeatother
+
+% brakets for citation superscripts
+% https://tex.stackexchange.com/questions/79591/superscripts-in-bibliography-with-bibtex#79599
+\makeatletter 
+	\renewcommand{\@citess}[1]{\textsuperscript{\,[#1]}} 
+\makeatother
+
+% https://tex.stackexchange.com/questions/29084/biblatex-separator-for-citing-multiple-sources-some-of-them-with-page-some-no
+%\renewcommand\multicitedelim{\addcomma\space}
+
+% cell spaces global
+% https://tex.stackexchange.com/questions/378268/makegapedcells-disables-rowcolor#378630
+\setlength\cellspacetoplimit{4pt}
+\setlength\cellspacebottomlimit{4pt}
+
+\ifx\printabletext\trueValue
+	\relax
+\else
+	% change colour of glossary links
+	% https://tex.stackexchange.com/questions/38544/glossary-links-color
+	\def\glossarylinknewcolour{orange}
+	
+	\ifdefined\compileblack
+		\def\glossarylinknewcolour{black}
+	\else
+		\def\glossarylinknewcolour{orange}
+	\fi
+
+	\makeatletter
+	
+		\newcommand{\glsplainhyperlink}[2]{\colorlet{currenttext}{\glossarylinknewcolour}\colorlet{currentlink}{\@linkcolor}\hypersetup{linkcolor=currenttext}\hyperlink{#1}{#2}\hypersetup{linkcolor=currentlink}}
+		\let\@glslink\glsplainhyperlink
+		
+	\makeatother
+\fi
+
+% new spacing between cahpters, sections and subsections
+% https://tex.stackexchange.com/questions/53338/reducing-spacing-after-headings
+\titlespacing\section{0pt}{8pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}%
+\titlespacing\subsection{0pt}{8pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}%
+\titlespacing\subsubsection{0pt}{8pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}%
