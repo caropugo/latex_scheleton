@@ -1,0 +1,56 @@
+\section{Contenido del Trabajo}
+
+\lipsum[4]
+
+Enla cita dentro del texto~\textcite{Wolf2017} y al final del texto~\parencite{Wolf2017}...
+
+\subsection{Punto 1}
+
+\lipsum[5]
+
+En la Figura~\ref{fig:punto1} se observa ....
+
+\begin{figure}[]
+    \caption{Imagen de ejemplo Punto 1.}
+    \label{fig:punto1}
+    \centering
+    \begin{threeparttable}
+	    \includegraphics[width=1.0\linewidth]{punto1.png}
+	    \begin{tablenotes}
+	        \small
+	        \item \textit{Nota.} Aquí puedes agregar una descripción adicional o la fuente de la imagen.
+	    \end{tablenotes}
+    \end{threeparttable}
+\end{figure}
+
+
+\lipsum[6]
+
+En la Tabla~\ref{tab:voltajes} se muestra....
+
+\begin{table}[]
+    \centering
+    \caption{Resultados de la medición de voltajes en el microcontrolador.}
+    \label{tab:voltajes}
+    \begin{tabular}{@{} lcc @{}} % l=izq, c=centro, c=centro
+        \toprule
+        \textbf{Componente} & \textbf{Volt. Nominal (V)} & \textbf{Volt. Medido (V)} \\ \midrule
+        Puerto A            & 5.0                          & 4.92                        \\
+        Puerto B            & 3.3                          & 3.28                        \\
+        VCC                 & 5.0                          & 5.01                        \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\lipsum[7]
+
+En el Código~\ref{cod:python_ejemplo} se muesta...
+
+\lstinputlisting[
+    style=python_style,
+    linerange={11-},
+    firstnumber=11,
+    caption={Implementación del algoritmo de control en Python.},
+    label={cod:python_ejemplo}
+]{src/punto1.py}
+
+\lipsum

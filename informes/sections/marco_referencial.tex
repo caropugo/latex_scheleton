@@ -1,0 +1,110 @@
+\section{Marco de Referencia}
+
+El desarrollo de sistemas de monitoreo ambiental basados en sistemas embebidos requiere la integración de hardware de procesamiento, protocolos de comunicación serial y transductores de señales físicas. A continuación, se describen los componentes fundamentales para la integración de Robótica Autónoma en sistemas de automatización para procesos ambientales.
+
+\subsection{Sistemas Embebidos y Plataformas de Desarrollo}
+Un sistema embebido es un sistema de computación diseñado para realizar funciones específicas dentro de un sistema mecánico o eléctrico mayor~\parencite{Wolf2017}. En este proyecto, se secogió el Arduino Uno R3 para realizar la práctica~\footnote{Otras opciones de sistemas embebidos son ESP32, Raspberry Pi Pico, Arduino Nano, ESP8266.}. Según~\textcite{Margolis2020}, estas tarjetas facilitan el prototipado rápido gracias a su arquitectura abierta y la disponibilidad de bibliotecas para el manejo de sensores.
+
+\subsubsection{Arduino Uno}
+Arduino UNO es una placa de microcontrolador basada en el ATmega328P. Cuenta con 14 pines de entrada/salida digitales (de los cuales 6 se pueden usar como salidas PWM), 6 entradas analógicas, un resonador cerámico de $16~[MHz]$, una conexión USB, un conector de alimentación, un conector ICSP y un botón de reinicio~\cite{ArduinoUnoRev3, ArduinoUnoDatasheet}. Su pinout se muestra en la Fig.~\ref{fig:pinout_arduino}.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.9\linewidth]{pinout_arduino.png}
+    \caption{Pin out del Arduino Uno Rev 3~\parencite{ArduinoUnoPinout}.}
+    \label{fig:pinout_arduino}
+\end{figure}
+
+
+\subsection{Protocolo de Comunicación I2C}
+El protocolo \textit{Inter-Integrated Circuit} (I2C) es un estándar de comunicación serial que utiliza solo dos líneas: SDA (\textit{Serial Data}) y SCL (\textit{Serial Clock}). Es fundamental para la conexión de la pantalla LCD 16x2 mediante el módulo conversor de paralelo a I2C, lo que reduce significativamente el uso de pines en la unidad de procesamiento~\parencite{Mullins2021}. La dirección del dispositivo en el bus permite la transferencia de datos mediante una arquitectura maestro-esclavo. Eso significa que cuando se inicia la comunicación por parte de un dispositivo maestro, éste podrá mandar o recibir datos de sus esclavos. Los esclavos no podrán iniciar la comunicación, solo lo puede hacer el maestro, y tampoco pueden hablar los esclavos entre sí de forma directa sin que intervenga el maestro. Cada dispositivo tendrá una dirección única, aunque puede que varios de ellos la tengan igual y que se necesite usar un bus secundario para no generar conflictos o cambiarla si es posible~\parencite{HWLibreI2C}.
+
+El protocolo del bus I2C (ver Fig.~\ref{fig:senial_i2c}) también prevé el uso de resistencias pull-up en las lineas de voltaje (Vcc) de alimentación, aunque con Arduino no se suelen usar estas resistencias pull-up porque las bibliotecas de programación como \lstinline|Wire.h| activa las internas con valores de $20-30~[k \Omega]$. La frecuencia de reloj para las transmisiones es de $100~[MHz]$ de forma estándar, aunque existe un modo más rápido a $400~[MHz]$. 
+En Arduino Uno los pines que se pueden utilizar para usar la conexión son el \lstinline|A4| para SDA (datos) y \lstinline|A5| para SCK (reloj)~\cite{HWLibreI2C}.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1.0\linewidth]{senial_i2c.png}
+    \caption{Diagrama de tiempos para el protocolo de la señal I2C~\parencite{HWLibreI2C}.}
+    \label{fig:senial_i2c}
+\end{figure}
+
+
+\subsection{Sensores de Variables Ambientales}
+El monitoreo de la calidad del aire y condiciones climáticas se basa en los siguientes principios:
+
+\subsubsection{Sensor de CO2} 
+
+Estos sensores suelen operar bajo el principio de infrarrojo no dispersivo (NDIR) o mediante sensores químicos de gas. Permiten cuantificar la concentración de dióxido de carbono en partes por millón (ppm)~\parencite{Korotcenkov2019}. El sensor a utilizar es el MQ135 (ver Fig.~\ref{fig:pinout_MQ135}) que es un sensor de gas de tipo semiconductor de óxido de estaño ($SnO_2$), cuya conductividad eléctrica varía en presencia de gases contaminantes como el amoníaco ($NH_3$), óxidos de nitrógeno ($NO_x$), alcohl, benceno, humo, dióxido de carbono ($CO_2$), entre otros. Según \textcite{Mandal2020}, este dispositivo requiere un proceso de calibración mediante una resistencia de carga ($R_L$) para convertir la variación de resistencia interna en una señal de voltaje analógica~\footnote{Los pines analógicos del Arduino son de $n=10$ bits por lo que la señal recibida tiene $2^n = 1024$ valores posibles. Como se tiene en cuenta el $0_2$ el rango de valores es de $0$ a $1023$.} interpretable por un microcontrolador. 
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1.0\linewidth]{MQ135.png}
+    \caption{Pin out del sensor de gas MQ135~\parencite{imagenMQ135}.}
+    \label{fig:pinout_MQ135}
+\end{figure}
+
+
+Calcular la concentración de $CO_2$ en un MQ135 no es tan directo como leer un voltaje, ya que la relación entre la resistencia del sensor y la concentración de gas es logarítmica. Para obtener el valor en partes por millón (ppm), se utiliza la ecuación~\ref{eq:ppm_MQ135} derivada de la curva de sensibilidad del fabricante, donde:
+\begin{itemize}
+	\item $R_s$ es la resistencia del sensor en presencia del gas (calculada a partir del voltaje leído por el Arduino con la ecuación~\ref{eq:Rs_MQ135})~\footnote{Donde $R_L$ suele ser la resistencia de carga en la placa típicamente $1~[k \Omega]$ o $10~[k \Omega]$}.
+	\item $R_0$ es la resistencia del sensor en aire limpio (un valor de calibración constante aproximado a $400~ppm$ de $CO_2$).
+	\item $a$ y $b$ son constantes específicas para el $CO_2$. Según la curva estándar del MQ135, los  valores aproximados son $a \approx 110.47$ y $b \approx -2.86$.
+\end{itemize} 
+
+\begin{equation}
+	ppm = a \cdot \left( \frac{R_s}{R_0} \right)^b
+	\label{eq:ppm_MQ135}
+\end{equation}
+
+\begin{equation}
+	R_s = R_L \cdot \left( \frac{1023 - ADC}{ADC} \right)
+	\label{eq:Rs_MQ135}
+\end{equation}
+
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1.0\linewidth]{pinout_DHT11_DHT22.jpg}
+    \caption{Pin out del sensor de humedad y temperatura DHT11 y DHT22~\parencite{pinoutDHT}.}
+    \label{fig:pinout_DHT}
+\end{figure}
+
+
+
+\subsubsection{Sensor de Temperatura y Humedad} 
+
+Dispositivos como el DHT11 o DHT22 (ver Fig.~\ref{fig:pinout_DHT}) integran un termistor para medir el aire circundante y un sensor capacitivo de humedad, entregando una señal digital procesada que representa las magnitudes físicas del entorno~\parencite{Smith2022}. El DHT22 posee una mayor precisión y un rango de medición más amplio que el DHT11. Como señala \textcite{Piyare2017}, el dispositivo utiliza un protocolo de comunicación de un solo hilo (\textit{single-bus}), transmitiendo una trama de 40 bits que incluye datos de humedad, temperatura y un código de verificación \textit{checksum} para garantizar la integridad de la lectura. Para utilizar este sensor con Arduino se puede utilizar la librería \lstinline|DHT.h| de Adafruit.
+
+
+
+Comparación Detallada: DHT11 vs. DHT22
+\begin{itemize}
+    \item \textit{Precisión y Rango:} El DHT22 es superior, midiendo de $-40$ a $80^\circ C$ $\left( \pm 0.5^\circ C \right)$ y $0-100\%$ de humedad. El DHT11 es más básico, con rangos de $0$ a $50^\circ C$ $\left( \pm 2.0^\circ C \right)$ y $20-90\%$ de humedad.
+    \item \textit{Velocidad de Lectura:} El DHT11 es más rápido, permitiendo lecturas cada 1 segundo ($1~[Hz]$), mientras que el DHT22 necesita 2 segundos entre lecturas.
+    \item \textit{Resolución:} El DHT22 trabaja con números decimales, ofreciendo mayor precisión numérica que el DHT11, que solo trabaja con números enteros.
+    \item \textit{Formato:} Ambos vienen en versiones de 4 pines o en módulos con PCB (3 pines) que incluyen una resistencia pull-up integrada.
+\end{itemize}
+
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1.0\linewidth]{LCD_con_I2C.png}
+    \caption{Pantalla LCD $16 \times 2$ con conversor a protocolo I2C~\parencite{LCD_I2C}.}
+    \label{fig:pinout_LCD}
+\end{figure}
+
+
+\subsection{Visualización de Datos}
+La interfaz hombre-máquina (HMI) se implementa mediante una pantalla de cristal líquido (LCD). La técnica de \textit{scrolling} de texto permite presentar cadenas de caracteres extensas en dimensiones limitadas (16x2), optimizando la legibilidad de la información para el usuario final.
+En cuanto a la extensión del mensaje a mostrar en la LCD, se debe tener en cuenta la restricción de la memoria DDRAM (Display Data RAM) donde se guardan los caracteres que se van a mostrar. La memoria del controlador (HD44780) tiene un tamaño fijo de 80 bytes, donde cada caracter ocupa 1 byte. Por lo tanto, el controlador solo puede guardar 80 caracteres a la vez, repartidos en dos filas de 40 espacios cada una. Sin el corrimiento del texto solo se muestran 16 de los 40 posibles caracteres. Para utilizar la pantalla con Arduino se requiere utilizar la librería \lstinline|LiquidCrystal_I2C.h| y en la Fig.~\ref{fig:pinout_LCD} se muestra cómo se debe conectar el módulo de I2C a la pantalla LCD y el pin out del controlador indicando el indicador del potenciómetro para el contraste visual.
+
+
+
+%\begin{figure}[]
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{pinout_i2c.png}
+%    \caption{Pin out del conversor a protocolo I2C~\parencite{pinout_I2C}.}
+%    \label{fig:pinout_i2c}
+%\end{figure}
+

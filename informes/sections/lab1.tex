@@ -1,0 +1,429 @@
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/teo/74_LS_48.png}
+    \caption{Integrado 7448 Decodificador de BCD a 7 segmentos~\cite{DECODER7448}.}
+    \label{fig:enter-label}
+\end{figure}
+
+\section{Práctica 1:}
+
+\subsection{Reconocimiento de los instrumentos de laboratorios}
+
+\subsubsection{Multímetro}
+
+\begin{itemize}
+    \item Inspeccionar visualmente cables y sondas en busca de posibles daños.\\
+    
+    \textbf{R//.} Se realiza inspección de las puntas del multímetro antes de usar y se encuentran en perfecto estado (ver figura~\ref{fig:sondas}).
+      
+    \item Confirmar la funcionalidad de los modos de medición: voltaje, corriente, resistencia y continuidad.
+    
+    \textbf{R//.} En la figura~\ref{fig:multimetro} se identifica de color verde las opciones para medir tensión, de color azul para corriente, y, de color rosado para continuidad y resistencia. Las puntas se conectan como se muestran para las mediciones mencionadas, en el caso de corriente para el orden de $\mu A$ y $mA$ hasta máximo $400~[mA]$, de lo contrario se debe cambiar la punta roja a la terminal señalada en color azul. Durante la inspección se revisan que el multímetro enciende al mover el selector en los diferentes modos VAC,VCC, OHM, HZ, HFE, uA, mA, A.
+       
+    \item ¿El multímetro que tiene a la mano es autorango o es manual? 
+    
+    \textbf{R//.} Es un multímetro autorrango, solo debemos seleccionar la variable que vamos a medir.
+    
+    \item Identifique cómo confirmar que el fusible para medición de corriente se encuentra en buen estado.
+    
+    \textbf{R//.} Para revisar si el fusible está bueno la mejor práctica es destapar el equipo, retirar los  fusibles y realizar la medición de continuidad en el elemento. Si los fusibles indican abierto se deben cambiar con la referencia de valor de amperaje que encontramos en el respaldo del multímetro, o en el manual del equipo. También se puede verificar si un fusible está en buen estado es usar el multímetro en el modo de prueba de continuidad o resistencia (ver figura~\ref{fig:multimetro}). Este multímetro tiene 2 fusibles: $0.5~[A]/250~[V]$ y $10~[A]/250~[V]$.
+    \begin{enumerate}
+    		\item Configurar el multímetro: Poner el multímetro en la función de continuidad (generalmente representada por un símbolo de onda o un diodo) o en resistencia ($\Omega$).
+    		\item Conectar los cables de prueba: Colocar las puntas del multímetro en los terminales del fusible. El multímetro debe estar en el modo de prueba para medir continuidad o resistencia.
+    		\item Observa la lectura: 
+    		\begin{itemize}
+    			\item Si el fusible está en buen estado, el multímetro emitirá un sonido (en modo de continuidad) o mostrará una lectura cercana a cero (en modo de resistencia), indicando que hay continuidad a través del fusible.
+    			\item Si el fusible está roto, el multímetro no emitirá sonido ni mostrará una lectura de resistencia cercana a cero. En este caso, el fusible está quemado y debe ser reemplazado.
+    		\end{itemize}
+    \end{enumerate}
+    
+    
+    
+    
+    \item Implemente un circuito en serie con una resistencia, mida voltaje y corriente.
+
+    \textbf{R//.} En la figura~\ref{fig:circ_R} se muestran las mediciones de tensión y corriente sobre la resistencia. La tensión se mide en paralelo, es decir, se tocan los extremos de la resistencia con las puntas del multímetro. La corriente, por otro lado, se mide en serie, es decir, se abre el circuito y se conectan las puntas del multímetro en serie con la resistencia ($V_{in}=5.04~[V]$ , $R=1~[k \Omega]$, $V_{R}=5.04~[V]$, $I_{R}=5.14~[mA]$).
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/sondas.png}
+        \caption{Puntas del multímetro.}
+        \label{fig:sondas}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/multimetro.png}
+        \caption{Multímetro identificando los modos de medición (izq.) y comprobación de fusibles (der.). Multímetro:Marca= UNI-T, Referencia=UT136B+ }
+        \label{fig:multimetro}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\linewidth]{img/lab/circ_resistivo.png}
+        \caption{Para un circuito resistivo en serie se muestran las mediciones de tensión (arr.) y de corriente (abj.). }
+        \label{fig:circ_R}
+    \end{figure}
+    
+    
+\end{itemize}
+
+
+\vspace{2mm}
+
+\subsubsection{Fuente de alimentación}
+
+\begin{itemize}
+    \item Identificar si es una fuente dual, y cuantas fuentes nos proporciona la referencia que tenemos disponible.
+    
+    \textbf{R//.} La fuente de la figura~\ref{fig:fuente} es dual. Proporciona 3 salidas, las dos de la izquierda son variables $0-32~[V]/3~[A]$ (CH1 y CH2) y la de la derecha es fija de $5~[V]/3~[A]$ (CH3).
+    \item Si contamos con la fuente dual, hacer una conexión para una fuente dual.
+
+    \textbf{R//.} En la figura~\ref{fig:fuente_dual} se muestra cómo hacer una conexión dual, donde se conectan el terminal positivo de una fuente y el negativo de la otra. Dicha conexión será la tierra del circuito, mientras que los terminales restantes serán la salida de la fuente positiva y negativa de la fuente dual de hasta $+32~[V]$ y $-32~[V]$.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/fuente.png}
+        \caption{Fuente dual UNI-T UTP3303-II.}
+        \label{fig:fuente}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/fuente_dual.png}
+        \caption{Fuente dual conectada para tener salidas de $+6~[V]$ y $-6~[V]$.}
+        \label{fig:fuente_dual}
+    \end{figure}
+
+\end{itemize}
+
+\vspace{2mm}
+\subsubsection{Generador de señales}
+
+\begin{itemize}
+    \item Identificar la salida de la señal del generador.
+    
+    \textbf{R//.} La sonda se conecta a la salida del generador como se observa en la figura~\ref{fig:generador} (recuadro de color rojo).
+    
+    \item Identificar cómo cambiar la frecuencia y amplitud de la señal.
+    
+    \textbf{R//.} \begin{itemize}
+    		\item \textit{Frecuencia:} En la figura~\ref{fig:generador} se identifican los pulsadores para determinar el orden de magnitud de las frecuencia de la señal, luego se procede a graduar el valor exacto con las perillas coarse y fine (recuadros de color verde). 
+    		\item \textit{Amplitud:} En la figura~\ref{fig:generador} se identifica el pulsador (dB) que habilita la perilla (Output Level) para graduar la magnitud de la señal (recuadros de color amarillo). 
+    \end{itemize}
+    
+    \item Implementar un circuito serie con una resistencia y un capacitor y alimentarlo con el generador de señales.
+    
+    \textbf{R//.} En la figura~\ref{fig:circ_RC} se muestra el circuito RC en serie alimentado con la señal de $2~V_{pp}$ y $f=20~[Hz]$.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/generador.png}
+        \caption{Generador de señales sinusoidal, cuadrada y triangular.}
+        \label{fig:generador}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\linewidth]{img/lab/circ_RC.png}
+        \caption{Circuito RC en serie con $R=820~[\Omega]$, $C = 100~[\mu F]$ y una señal de generador de $f=20~[Hz]$ y $V=2~V_{pp}$.}
+        \label{fig:circ_RC}
+    \end{figure}
+    
+\end{itemize}
+
+\vspace{2mm}
+\subsubsection{Osciloscopio}
+
+\begin{itemize}
+    \item Identificar los canales del generador, cuántos canales tiene la referencia con la que está trabajando.
+
+    \textbf{R//.} En ambas referencias se tienen 2 canales de entrada en el osciloscopio (ver figura~\ref{fig:osciloscopio}).
+       
+    \item Comprobar las sondas con la señal de prueba del osciloscopio.
+    
+    \textbf{R//.} Se conecta la punta del osciloscopio al punto de prueba y se observa que la señal se mantiene en cero (ver figura~\ref{fig:osc_test_exp} izq.).
+    
+    \item Explorar el menú del osciloscopio, qué funciones identifica.
+
+    \textbf{R//.} Se observaron las diferentes opciones de ajuste y se realizaron movimientos para dejar la señal de entrada estable y poderla observar con facilidad (ver figura~\ref{fig:osc_test_exp} der.). La señal observada es de amplitud $2~V_{pp}$ y periodo de $200~[\mu s]$. 
+
+    
+    \item Para el circuito que se implementó en el punto del generador de señales, con el osciloscopio, observar la señal del generador y la señal en el condensador.
+
+    \textbf{R//.} En la figura~\ref{fig:osc_circ_RC_0} se muestran la señal del generador (cent.) y la señal de salida sobre el condensador (der.). La señal sobre el condensador muestra la carga del condensador en el ciclo positivo de la señal cuadrada (entrada) y la descarga del condensador en el ciclo negativo de la señal cuadrada. El delta de tensión que se observa en la carga y descarga es de $0.14~[V]$ por encima de la tensión pico de la entrada.
+
+    \item Ajustar el osciloscopio para observar las dos señales de forma simultánea.
+    
+    \textbf{R//.} En la figura~\ref{fig:osc_circ_RC} se muestran la señal del generador (canal B, color azul) y la señal de salida sobre el condensador (canal A, color rojo). En esta figura se observa más claramente lo mencionado anteriormente, el condensador se carga en el ciclo positivo de la se
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/osc.png}
+        \caption{Osciloscopios utilizados. }
+        \label{fig:osciloscopio}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/osc_test_exp.png}
+        \caption{Señal del osciloscopio en el punto de prueba (izq) y exploración de funcionalidades (der.). \textbf{X: $50~[\mu s/div]$, CH1: $0.5~[V/div]$.} }
+        \label{fig:osc_test_exp}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/osc_circ_RC_0.png}
+        \caption{Montaje del circuito RC (izq.), señal del generador (cent.) y señal del condensador (der.). $C=100~[\mu F]$ y $R=820~[\Omega]$. \textbf{X: $20~[ms/div]$, A: $2~[V/div]$, f:$20~[Hz]$.} }
+        \label{fig:osc_circ_RC_0}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/lab/osc_circ_RC.png}
+        \caption{Señales del circuito RC observadas en el osciloscopio donde el canal A es la señal sobre el condensador (color rojo) y el canal B es la señal del generador (color azul). \textbf{X: $20~[ms/div]$, A: $1~[V/div]$, B: $2~[V/div]$}, f:$20~[Hz]$.}
+        \label{fig:osc_circ_RC}
+    \end{figure}
+
+
+\end{itemize}
+
+
+\subsection{Implementación de compuertas lógicas}
+
+Para cada una de las compuertas se muestra el montaje, la simulación en Qucs, la simulación en logisim y el diagrama de tiempos de la sintetización en ISE de Xilinx.
+
+\vspace{2mm}
+\subsubsection{Compuerta AND} 
+En la figura~\ref{fig:and_sim} se muestran las simulaciones y en la figura~\ref{fig:tabla_and} se muestra la comprobación de la tabla de verdad para la compuerta. 
+%En este caso, la salida sólo es $1$ cuando ambas entradas son $1$.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/and_sim.png}
+    \caption{Compuerta AND: Montaje de la compuerta, diagrama de tiempos, simulación en qucs (recuadro azul) y en logisim (recuadro verde).}
+    \label{fig:and_sim}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/lab/tabla_and.png}
+    \caption{Compuerta AND.}
+    \label{fig:tabla_and}
+\end{figure}
+
+
+\vspace{2mm}
+\subsubsection{Compuerta OR}
+
+En la figura~\ref{fig:or_sim} se muestran las simulaciones y en la figura~\ref{fig:tabla_or} se muestra la comprobación de la tabla de verdad para la compuerta. 
+%En este caso, la salida sólo es $0$ cuando ambas entradas son $0$.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/or_sim.png}
+    \caption{Compuerta OR: Montaje de la compuerta, diagrama de tiempos, simulación en qucs (recuadro azul) y en logisim (recuadro verde).}
+    \label{fig:or_sim}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/lab/tabla_or.png}
+    \caption{Compuerta OR.}
+    \label{fig:tabla_or}
+\end{figure}
+
+\vspace{2mm}
+\subsubsection{Compuerta NOT}
+
+En la figura~\ref{fig:not_sim} se muestran las simulaciones y en la figura~\ref{fig:tabla_not} se muestra la comprobación de la tabla de verdad para la compuerta. 
+%En este caso, la salida es la negación de la entrada, si la entrada es $0$ la salida es $1$ y viceversa.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/sim/not_sim.png}
+    \caption{Compuerta NOT: Montaje de la compuerta, diagrama de tiempos, simulación en qucs (recuadro azul) y en logisim (recuadro verde).}
+    \label{fig:not_sim}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{img/lab/tabla_not.png}
+    \caption{Compuerta NOT.}
+    \label{fig:tabla_not}
+\end{figure}
+
+\subsubsection{Compuerta NAND}
+
+En la figura~\ref{fig:nand_sim} se muestran las simulaciones y en la figura~\ref{fig:tabla_nand} se muestra la comprobación de la tabla de verdad para la compuerta. 
+%Es similar a la compuerta AND pero con la salida invertida, es decir, la salida sólo es $0$ cuando ambas entradas son $1$.
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{img/sim/nand_sim.png}
+%    \caption{Compuerta NAND: Montaje de la compuerta, diagrama de tiempos y simulación en qucs (recuadro azul), logisim (recuadro verde).}
+%    \label{fig:nand_sim}
+%\end{figure}
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{img/lab/tabla_nand.png}
+%    \caption{Compuerta NAND.}
+%    \label{fig:tabla_nand}
+%\end{figure}
+
+\subsubsection{Compuerta XOR}
+
+En la figura~\ref{fig:xor_sim} se muestran las simulaciones y en la figura~\ref{fig:tabla_xor} se muestra la comprobación de la tabla de verdad para la compuerta. 
+%La compuerta OR exclusiva es utilizada para realizar sumas que tienen en cuenta el acarreo de salida, es decir, difiere con la compuerta OR cuando ambas entradas son $1$, pues para la compuerta XOR $1+1=0$.
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{img/sim/xor_sim.png}
+%    \caption{Compuerta XOR: Montaje de la compuerta, diagrama de tiempos y simulación en qucs (recuadro azul), logisim (recuadro verde).}
+%    \label{fig:xor_sim}
+%\end{figure}
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{img/lab/tabla_xor.png}
+%    \caption{Compuerta XOR.}
+%    \label{fig:tabla_xor}
+%\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/nand_sim.png}
+    \caption{Compuerta NAND: Montaje de la compuerta, diagrama de tiempos y simulación en qucs (recuadro azul), logisim (recuadro verde).}
+    \label{fig:nand_sim}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/lab/tabla_nand.png}
+    \caption{Compuerta NAND.}
+    \label{fig:tabla_nand}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/xor_sim.png}
+    \caption{Compuerta XOR: Montaje de la compuerta, diagrama de tiempos y simulación en qucs (recuadro azul), logisim (recuadro verde).}
+    \label{fig:xor_sim}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/lab/tabla_xor.png}
+    \caption{Compuerta XOR.}
+    \label{fig:tabla_xor}
+\end{figure}
+
+
+\subsection{Diseño y Verificación de un Control de Seguridad con Compuertas Lógicas}
+
+Las condiciones para que la salida sea $1$ son las siguientes:
+\begin{enumerate}
+	\item [a.] Si A y B están presionados (A=1 y B=1), el LED y el buzzer deberían activarse.
+	\item [b.] Si C está presionado y D no está presionado (C=1 y D=0), el LED y el buzzer deberían activarse.
+\end{enumerate}
+
+Con esas condiciones, la tabla de verdad del sistema se muestra en la tabla~\ref{tab:ctrl_seguridad}, la simulación en logisim se muestra en la figura~\ref{fig:logisim_ctrl_seguridad}, la simulación en Qucs en la figura~\ref{fig:qucs_ctrl_seguridad}, la simulación en Proteus en la figura~\ref{fig:proteus_ctrl_seguridad}, el diagrama de tiempos en la figura~\ref{fig:ise_ctrl_seguridad} y el código de sintetización de hardware se puede consultar en \href{https://www.edaplayground.com/x/sYMg}{EdaPlayground}. El montaje del sistema se muestra en la figura~\ref{fig:montaje_ctrl_seguridad} pero la comprobación de las 16 posibles combinaciones de la tabla de verdad se presenta en un \href{https://youtu.be/zcuXTBMACOY}{video de youtube}.
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[]
+\centering
+\caption{Tabla de verdad para el sistema de control de seguridad.}
+\label{tab:ctrl_seguridad}
+\begin{tabular}{|c|cccc|
+>{\columncolor[HTML]{ECF4FF}}c |c|}
+\hline
+                          & \multicolumn{4}{c|}{\textbf{Entradas}}                                                                           & \textbf{Salida}           &                                      \\ \cline{2-6}
+\multirow{-2}{*}{\#}      & \multicolumn{1}{c|}{\textbf{A}} & \multicolumn{1}{c|}{\textbf{B}} & \multicolumn{1}{c|}{\textbf{C}} & \textbf{D} & \textbf{S}                & \multirow{-2}{*}{\textbf{Condición}} \\ \hline
+{\color[HTML]{9B9B9B} 0}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & 0          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}---          \\ \hline
+{\color[HTML]{9B9B9B} 1}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 2}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & 0          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}b            \\ \hline
+{\color[HTML]{9B9B9B} 3}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 4}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & 0          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}---          \\ \hline
+{\color[HTML]{9B9B9B} 5}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 6}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & 0          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}b            \\ \hline
+{\color[HTML]{9B9B9B} 7}  & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}---          \\ \hline
+{\color[HTML]{9B9B9B} 8}  & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & 0          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 9}  & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{0}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 10} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & 0          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}b            \\ \hline
+{\color[HTML]{9B9B9B} 11} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & \multicolumn{1}{c|}{1}          & 1          & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}\textbf{---} \\ \hline
+{\color[HTML]{9B9B9B} 12} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & 0          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}a            \\ \hline
+{\color[HTML]{9B9B9B} 13} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{0}          & 1          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}a            \\ \hline
+{\color[HTML]{9B9B9B} 14} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & 0          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}a y b        \\ \hline
+{\color[HTML]{9B9B9B} 15} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{1}          & 1          & \textbf{1}                & \cellcolor[HTML]{FFFFFF}a            \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/ctrl_seguridad_logisim.png}
+    \caption{Simulación en logisim del sistema de control de seguridad.}
+    \label{fig:logisim_ctrl_seguridad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/ctrl_seguridad_qucs.png}
+    \caption{Simulación en qucs del sistema de control de seguridad.}
+    \label{fig:qucs_ctrl_seguridad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/ctrl_seguridad_proteus.png}
+    \caption{Simulación en Proteus del sistema de control de seguridad. \href{https://youtu.be/YgVKxnMywWo?si=mXoXq90Iym1k0jTj}{Video con la comprobación de estados}.}
+    \label{fig:proteus_ctrl_seguridad}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/sim/ctrl_seguridad_ise.png}
+    \caption{Sintetización de hardware en ISE del sistema. Se puede consultar el código de sintetización de Hardware en \href{https://www.edaplayground.com/x/sYMg}{EdaPlayground}.}
+    \label{fig:ise_ctrl_seguridad}
+\end{figure}
+
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=1.0\linewidth]{img/sim/buzzer_board.png}
+%    \caption{Caption}
+%    \label{fig:board_ctrl_seguridad}
+%\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/lab/buzzer_montaje.png}
+    \caption{Montaje del sistema de control de seguridad con buzzer. Puede comprobar su tabla de verdad en el \href{https://youtu.be/zcuXTBMACOY}{link del video}.}
+    \label{fig:montaje_ctrl_seguridad}
+\end{figure}
+
+
+\subsection{Análisis de Resultado\label{sec:analisis2}}
+\begin{itemize}
+    \item De la práctica se observó que los implementos a utilizar en el laboratorio se comportan según lo esperado en los manuales del fabricante.
+    \item En cuanto a las compuertas lógicas se comprobaron las tablas de verdad para cada una:
+    \begin{itemize}
+    		\item \textit{AND}: Da salida $1$ cuando ambas entradas son $1$.
+    		\item \textit{OR}: Da salida $1$ si al menos una de las entradas es $1$.
+    		\item \textit{NOT}: Invierte el valor de la entrada (si es $0$, da $1$; si es $1$, da $0$).
+    		\item \textit{NAND}: Es la inversa de la compuerta AND.
+    		\item \textit{XOR}: Da salida $1$ sólo cuando las entradas son diferentes.
+	\end{itemize}
+	
+    \item Los circuitos analizados en esta práctica son circuitos combinacionales. Lo que involucra evaluar cómo las salidas de los circuitos responden a diferentes combinaciones de entradas, es decir, en los que las salidas dependen únicamente de las entradas actuales, sin depender de valores previos (a diferencia de los circuitos secuenciales).
+    
+    \item Las compuertas 7400, 7404, 7408, 7486 y 7432 son parte de las familias de circuitos integrados de la serie 7400, que generalmente utilizan la tecnología TTL (Transistor-Transistor Logic) para su funcionamiento. Estas compuertas son algunas de las más comunes en electrónica digital. Para las entradas, en este tipo de tecnología, tensiones $<= 0.8~[V]$ son consideradas como un $0$ lógico y para valores de $>= 2.0~[V]$ se considera un $1$ lógico. Con esos valores, las tensiones en la salida serán de $<= 0.4~[V]$ para el $0$ lógico y $4.5 - 5.0~[V]$ para el $1$ lógico.
+    
+    \item En los circuitos digitales, cuando una compuerta lógica se pone en alta impedancia, su salida no influye en el sistema de señales. No genera un voltaje lógico "alto" ($1$) ni "bajo" ($0$). Básicamente, se comporta como si la salida estuviera desconectada. Si no se maneja adecuadamente, la línea puede quedar flotante. Esto significa que la señal podría fluctuar aleatoriamente debido a interferencias electromagnéticas o picos de voltaje no deseados, lo que podría producir un comportamiento errático en el sistema. Para evitar estos problemas, en muchos casos se utilizan resistencias de \textit{pull-up}~\footnote{\textit{Pull-up}: Resistencia que conecta la línea a Vcc para asegurar que la línea esté en $1$ lógico cuando la salida esté en alta impedancia.} o \textit{pull-down}~\footnote{\textit{Pull-down}: Resistencia que conecta la línea a tierra para asegurar que la línea esté en $0$ lógico cuando la salida esté en alta impedancia.}. Estas resistencias aseguran que la señal en esa línea tenga un estado definido (alto o bajo).
+    \item En la implementación de estos circuitos se debe tener cuidado con la tensión de alimentación de los integrados para evitar sobrepasar los límites sugeridos por los fabricantes. En la práctica, una fuente de error a tener en cuenta fueron los cables sueltos que interrumpían el circuito; por lo demás, el comportamiento fue el esperado teóricamente.
+\end{itemize}

@@ -1,0 +1,363 @@
+\documentclass[10pt, spanish]{beamer}
+
+% --- PAQUETES ---
+\usetheme{metropolis}           
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{karnaugh-map} % Para mapas de Karnaugh
+\usepackage{tikz}         % Para diagramas y circuitos
+\usepackage{circuitikz}   % Para circuitos eléctricos
+\usepackage{booktabs}     % Para tablas elegantes
+\usepackage{hyperref}
+\usepackage[backend=biber]{biblatex} % Configura Biber como motor
+\addbibresource{bibliography.bib}    % Nombre exacto de tu archivo .bib
+
+% --- CONFIGURACIÓN DE CÓDIGO (LISTINGS) ---
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\tiny,
+    breaklines=true,
+    language=[LaTeX]TeX,
+    frame=single
+}
+
+\title{\LaTeX{} para Ingeniería y Academia}
+\subtitle{De la Estructura APA/IEEE}
+\author{Introducción a la Composición Tipográfica Profesional}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+
+\begin{frame}{¿Qué es \LaTeX? y ¿Por qué usarlo?}
+    \begin{itemize}
+        \item \textbf{Concepto:} No es un procesador de texto (como Word), es un lenguaje de marcado para composición tipográfica (WYSIWYM).
+        \item \textbf{Ventajas:}
+            \begin{itemize}
+                \item Manejo automático de bibliografía e índices.
+                \item Calidad matemática insuperable.
+                \item Estabilidad en documentos largos (tesis de 300+ páginas).
+                \item Separación total de \textbf{Contenido} y \textbf{Formato}.
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Formatos Estándar: APA 7 e IEEE}
+
+\begin{frame}[fragile]{Estructura APA 7ma Edición}
+    Se usa el paquete \texttt{apa7}. Sus modos principales son:
+    \begin{itemize}
+        \item \textbf{man}: (manuscript) Doble espacio, una columna (para revisión).
+        \item \textbf{stu}: (student) Formato para trabajos estudiantiles.
+        \item \textbf{jou}: (journal) Formato de revista profesional.
+    \end{itemize}
+\begin{lstlisting}
+\documentclass[stu, spanish]{apa7}
+\title{Analisis de Circuitos}
+\shorttitle{APA7 en Beamer}
+\authorsname{Juan Perez}
+\affiliation{Universidad X}
+\begin{document}
+    \maketitle
+    \section{Introduccion} ...
+\end{document}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Estructura IEEE}
+    Ideal para artículos de ingeniería. Clases comunes:
+    \begin{itemize}
+        \item \textbf{conference}: Para ponencias en congresos.
+        \item \textbf{journal}: Para publicaciones en revistas IEEE.
+        \item \textbf{comsoc}: Para comunicaciones.
+    \end{itemize}
+\begin{lstlisting}
+\documentclass[conference]{IEEEtran}
+\title{Implementacion de Logica Digital}
+\author{\IEEEauthorblockN{Maria Garcia} \IEEEauthorblockA{Escuela de Ingenieria}}
+\begin{document}
+    \maketitle
+    \begin{abstract} Resumen del articulo... \end{abstract}
+\end{document}
+\end{lstlisting}
+\end{frame}
+
+\section{Elementos Académicos Comunes}
+
+\begin{frame}[fragile]{Ecuaciones y Referencias}
+    Diferencias fundamentales en matemáticas:
+    \begin{itemize}
+        \item \textbf{En línea:} \lstinline|$E=mc^2$| para el texto ($E=mc^2$).
+        \item \textbf{Bloque:} \lstinline|$$...$$| o \lstinline|\[...\]| no se numeran.
+        \item \textbf{Entorno \texttt{equation}:} Se numera y permite usar \texttt{\textbackslash label}.
+    \end{itemize}
+\begin{lstlisting}
+\begin{equation}
+    V = I \cdot R \label{eq:ohm}
+\end{equation}
+Como se observa en la ec. (\ref{eq:ohm})...
+\end{lstlisting}
+    \textbf{Salida:}
+    \begin{equation}
+        V = I \cdot R \label{eq:ohm_example}
+    \end{equation}
+\end{frame}
+
+\begin{frame}[fragile]{Símbolos y Letras Griegas}
+    Para símbolos especiales, visita: \href{https://manualdelatex.com/simbolos#chapter3}{Manual de Símbolos \LaTeX}.
+    \begin{itemize}
+        \item Letras: \lstinline|$\alpha, \beta, \gamma, \Delta, \Omega$| $\rightarrow$ $\alpha, \beta, \gamma, \Delta, \Omega$.
+        \item Operadores: \lstinline|$\int, \sum, \infty, \nabla$| $\rightarrow$ $\int, \sum, \infty, \nabla$.
+    \end{itemize}
+    Para fórmulas complejas sin escribir código: \href{https://editor-codecogs-com.translate.goog/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc}{Editor Visual CodeCogs}.
+\end{frame}
+
+\begin{frame}[fragile]{Tablas de Cálculo de Errores}
+    Recomiendo usar: \href{https://www.tablesgenerator.com/}{Tables Generator}.
+\begin{lstlisting}
+\begin{table}[h]
+\centering
+\caption{Comparativa de tensiones.}
+\label{tab:errores}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Nodo} & \textbf{Medido (V)} & \textbf{Simulado (V)} & \textbf{Error (\%)} \\ \hline
+1 & 4.98 & 5.00 & 0.4\% \\ \hline
+2 & 2.45 & 2.50 & 2.0\% \\ \hline
+\end{tabular}
+\end{table}
+\end{lstlisting}
+
+También se pueden apoyar de la IA para generar el código de tablas más complejas.
+\end{frame}
+
+\begin{frame}[fragile]{Inserción de Imágenes y Figuras}
+Para incluir imágenes se usa el paquete \texttt{graphicx} y el entorno \texttt{figure}.
+\begin{lstlisting}
+\begin{figure}[htbp] % Opciones de posicionamiento
+    \caption{Diagrama del sistema propuesto.} % Caption ARRIBA
+    \centering
+    \includegraphics[width=0.5\textwidth]{mi_imagen.png}
+    \label{fig:diagrama} % Etiqueta para referenciar
+    \par\vspace{2pt}\small \textit{Nota: Datos obtenidos en laboratorio.} % Nota abajo
+\end{figure}
+Como se aprecia en la Fig. \ref{fig:diagrama}, los resultados...
+\end{lstlisting}
+
+\textbf{Opciones de Posicionamiento [!htbp]:}
+\begin{itemize}
+    \item \textbf{h} (here): Intenta ponerla justo donde está el código.
+    \item \textbf{t} (top): Al principio de la página actual.
+    \item \textbf{b} (bottom): Al final de la página actual.
+    \item \textbf{p} (page): En una página dedicada solo a flotantes.
+    \item \textbf{!} : Fuerza a \LaTeX{} a ignorar algunas reglas estéticas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Citas en el Texto: APA 7 vs. IEEE}
+La forma de citar varía drásticamente según el estándar:
+
+\begin{table}[]
+\tiny
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Tipo de Cita} & \textbf{Normas APA 7ma Ed.} & \textbf{Normas IEEE} \\ \midrule
+\textbf{Parentética} & (García \& Pérez, 2023) & [1] \\
+\textbf{Narrativa} & García y Pérez (2023) afirman... & García y Pérez en [1]... \\
+\textbf{Múltiple} & (Altamirano, 2020; Zappa, 2018) & [2], [5] \\
+\textbf{Páginas} & (García, 2023, p. 45) & [1, p. 45] \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Comandos en \LaTeX:}
+\begin{itemize}
+    \item \lstinline|\cite{key}|: Cita estándar ([1] o (García, 2023)).
+    \item \lstinline|\textcite{key}|: Cita narrativa (García (2023)). Solo en APA/BibLaTeX.
+    \item \lstinline|\citeonline{key}|: Variante para IEEE según algunos paquetes.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Comandos de Citación: \texttt{\textbackslash parentcite} vs \texttt{\textbackslash textcite}}
+Para documentos en \textbf{APA 7}, no basta con usar \texttt{\textbackslash cite}. \texttt{biblatex} ofrece comandos específicos para cumplir con la norma:
+
+\begin{itemize}
+    \item \textbf{\textbackslash parentcite\{key\}}: Cita tradicional al final de un párrafo.
+    \begin{itemize}
+        \item \textit{Resultado APA:} (García \& Pérez, 2024)
+        \item \textit{Resultado IEEE:} [1]
+    \end{itemize}
+    \item \textbf{\textbackslash textcite\{key\}}: Cita narrativa donde el autor es el sujeto.
+    \begin{itemize}
+        \item \textit{Resultado APA:} García y Pérez (2024)
+        \item \textit{Resultado IEEE:} García y Pérez [1]
+    \end{itemize}
+\end{itemize}
+
+\textbf{Ejemplo de uso en el código:}
+\begin{lstlisting}
+Segun \textcite{manual_latex}, los simbolos son ...
+Esto se debe a la estructura del nucelo \parencite{codecogs}.
+\end{lstlisting}
+
+\textit{Nota: Usar estos comandos hace que tu documento sea ``estilo-independiente''; si cambias de APA a IEEE, \LaTeX{} ajustará el formato automáticamente.}
+\end{frame}
+
+
+\begin{frame}[fragile]{Configuración de Bibliografía Externa}
+Para gestionar referencias, se recomienda el paquete \texttt{biblatex}. En el \textbf{preámbulo} (antes de \texttt{\textbackslash begin\{document\}}) debes agregar:
+
+\begin{lstlisting}
+% 1. Cargar el paquete y definir el estilo (apa, ieee, etc.)
+\usepackage[style=apa, backend=biber]{biblatex}
+
+% 2. Vincular el archivo .bib (IMPORTANTE: incluir extension)
+\addbibresource{referencias.bib}
+\end{lstlisting}
+
+\textbf{Puntos clave:}
+\begin{itemize}
+    \item \textbf{style:} Define si se verá como (García, 2024) o [1].
+    \item \textbf{backend=biber:} Es el motor que procesa los datos (más potente que el antiguo BibTeX).
+    \item \textbf{Comando de salida:} Usa \texttt{\textbackslash printbibliography} donde quieras que aparezca la lista final.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Estructura del archivo \texttt{referencias.bib}}
+El archivo bibliográfico es una base de datos en texto plano. Cada entrada tiene un tipo (\texttt{@online}, \texttt{@article}, etc.) y una \textbf{llave} única.
+
+\begin{lstlisting}
+@online{manual_latex,
+    author = {Manual de LaTeX},
+    title  = {Simbolos Matematicos},
+    year   = {2024},
+    url    = {https://manualdelatex.com/simbolos},
+    urldate = {2024-05-20}
+}
+
+@online{codecogs,
+    author = {CodeCogs},
+    title  = {Editor Visual de Ecuaciones},
+    year   = {2024},
+    url    = {https://editor.codecogs.com}
+}
+
+@online{tablesgen,
+    author = {Tables Generator},
+    title  = {Generador de tablas para LaTeX},
+    url    = {https://www.tablesgenerator.com}
+}
+\end{lstlisting}
+\textit{Nota: La "llave" (ej. \texttt{codecogs}) es lo que usas para citar con \texttt{\textbackslash cite\{codecogs\}}.}
+\end{frame}
+
+
+
+\section{Lógica Digital y Gráficos}
+
+\begin{frame}[fragile]{Mapas de K. con Minterminos y Condiciones ``No Importa''}
+Podemos optimizar el llenado con \texttt{\textbackslash minterms}, \texttt{\textbackslash maxterms} y usar \textbf{X} (\texttt{\textbackslash autoterms\{X\}}) para simplificar.
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}
+\begin{karnaugh-map}[4][4][1][$CD$][$AB$]
+	\minterms{4,10,12,14}
+	\maxterms{2,3,6,8}
+	\autoterms[X]
+	\implicant{4}{12}
+	\implicant{14}{10}
+\end{karnaugh-map}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \centering
+	\begin{karnaugh-map}[4][4][1][$CD$][$AB$]
+    		\minterms{4,10,12,14}
+	    \maxterms{2,3,6,8}
+    		\autoterms[X]
+	    \implicant{4}{12} % Grupo de las 4 esquinas
+	    \implicant{14}{10}  % Grupo de 2 (celdas 5 y 7)
+	\end{karnaugh-map}
+\end{column}
+\end{columns}
+
+%\small \textbf{Nota:} \texttt{\textbackslash implicant\{0\}\{10\}} en un mapa de 4x4 identifica que los extremos son adyacentes y crea los arcos en las esquinas.
+\end{frame}
+
+\begin{frame}[fragile]{El poder de TikZ y Circuitikz}
+    Permite dibujar circuitos directamente en el código.
+\begin{lstlisting}
+\begin{circuitikz}
+  \draw (0,0) to[V=$V_s$] (0,2) to[R=$R_1$] (2,2) 
+        to[C=$C_1$] (2,0) -- (0,0);
+\end{circuitikz}
+\end{lstlisting}
+    \centering
+    \begin{circuitikz}[scale=0.7]
+      \draw (0,0) to[V=$V_s$] (0,2) to[R=$10\Omega$] (2,2) 
+            to[C=$1\mu F$] (2,0) -- (0,0);
+    \end{circuitikz}
+\end{frame}
+
+\section{Instalación y Compilación}
+
+\begin{frame}{Compilación Local y Herramientas}
+    Para trabajar sin internet necesitas:
+    \begin{enumerate}
+        \item \textbf{Un Motor (\LaTeX{} Distribution):}
+            \begin{itemize}
+                \item \textbf{Windows:} MiKTeX (ligero) o TeX Live.
+                \item \textbf{Linux:} TeX Live (\texttt{sudo apt install texlive-full}).
+            \end{itemize}
+        \item \textbf{Un Editor (IDE):}
+            \begin{itemize}
+                \item \textbf{Texmaker:} Multiplataforma, muy estable y gratuito.
+                \item \textbf{TeXstudio:} Con autocompletado avanzado.
+                \item \textbf{VS Code:} Con la extensión "LaTeX Workshop".
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[standout]
+    ¡Gracias! \\
+    ¿Preguntas?
+\end{frame}
+
+\section{Referencias Bibliográficas}
+
+\begin{frame}{Referencias en Formato IEEE}
+    % Nota: Para mostrar esto realmente, tendrias que cambiar el estilo en el preambulo 
+    % a [style=ieee]. Aqui lo mostramos como ejemplo visual.
+    \begin{enumerate}
+        \item[\small [1]] \small Manual de LaTeX, ``Símbolos Matemáticos'', [En línea]. Disponible en: \url{https://manualdelatex.com/simbolos}.
+        \item[\small [2]] CodeCogs, ``Editor Visual de Ecuaciones'', 2026. [En línea]. Disponible en: \url{https://editor.codecogs.com}.
+        \item[\small [3]] Tables Generator, ``Generador de tablas para LaTeX'', [En línea]. Disponible en: \url{https://www.tablesgenerator.com}.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Referencias en Formato APA 7}
+    \begin{itemize}
+        \item[\quad] \small CodeCogs. (2026). \textit{Editor Visual de Ecuaciones}. Recuperado de \url{https://editor.codecogs.com}
+        \item[\quad] \small Manual de LaTeX. (s.f.). \textit{Símbolos Matemáticos}. Recuperado de \url{https://manualdelatex.com/simbolos}
+        \item[\quad] \small Tables Generator. (s.f.). \textit{Generador de tablas para LaTeX}. Recuperado de \url{https://www.tablesgenerator.com}
+    \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,52 @@
+\section{Resultados}
+
+\subsection{Punto 1}
+
+El mensaje que se muestra en la pantalla LCD con scroll de derecha a izquierda se muestra en la Fig.~\ref{fig:punto1}, el cual se generó utilizando el código~\ref{lst:lcd_i2c}.
+
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=1.0\linewidth]{punto1.png}
+    \caption{Evidencia del punto 1 donde se muestra un mensaje con scroll de derecha a izquierda.}
+    \label{fig:punto1}
+\end{figure}
+
+\subsection{Punto 2}
+
+Las medidas de humedad relativa, temperatura y concentración de $CO_2$ se muestra en el video de YouTube \url{https://youtu.be/foZwhEUdPcA}. Adicionalmente, en la Fig.~\ref{fig:mediciones_dht22} se muestran 10 mediciones distintas de humedad y temperatura; mientras que, en la Fig.~\ref{fig:mediciones_mq135} se muestran 10, de concentración de $CO_2$. Las mediciones de las imágenes se encuentran consignadas también en la tabla~\ref{tab:analisis_sensores} donde se evidencia el rango alcanzado en las condiciones del laboratorio para las 3 variables físicas medidas.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{mediciones_HT.png}
+    \caption{Mediciones de humedad relativa y temmperatura con el DHT22.}
+    \label{fig:mediciones_dht22}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{mediciones_CO2.png}
+    \caption{Mediciones de concentración de $CO_2$ con el MQ135.}
+    \label{fig:mediciones_mq135}
+\end{figure}
+
+\begin{table}[htbp]
+\caption{Mediciones de las variables ambientales escogidas.}
+\label{tab:analisis_sensores}
+\centering
+\begin{tabular}{cccc}
+\toprule
+\textbf{Muestra} & \textbf{$CO_2~[mg/L]$} & \textbf{Temp. $[^\circ C]$} & \textbf{Humedad relativa $[\%]$} \\ 
+\midrule
+1  & 0.74  & 21.50 & 62.70 \\
+2  & 1.16  & 31.30 & 50.70 \\
+3  & 1.54  & 53.00 & 41.60 \\
+4  & 133.48  & 38.00 & 45.60 \\
+5  & 0.97  & 61.90 & 37.20 \\
+6  & 43.20 & 47.70 & 41.60 \\
+7  & 1.81  & 43.00 & 53.60 \\
+8  & 1.24  & 56.90 & 39.70 \\
+9  & 1.44  & 64.90 & 37.30 \\
+10 & 2.00  & 52.30 & 40.80 \\
+\bottomrule
+\end{tabular}
+\end{table}

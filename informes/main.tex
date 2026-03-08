@@ -1,0 +1,51 @@
+\input{config.tex}
+
+% 1. LÓGICA DE CLASE (Antes de cualquier otra cosa)
+\makeatletter
+\ifx\estilo\apa
+    \edef\opciones{\subtipo, 12pt, letterpaper, donotrepeattitle, floatsintext}
+    \expandafter\documentclass\expandafter[\opciones]{apa7}
+    \usepackage[style=apa, backend=biber]{biblatex}
+\else
+    \expandafter\documentclass\expandafter[\subtipo]{IEEEtran}
+    \usepackage[style=ieee, backend=biber]{biblatex}
+\fi
+\makeatother
+
+% 2. CARGA DE PAQUETES Y RECURSOS
+\input{preamble.tex}
+\addbibresource{references.bib}
+
+% 3. ASIGNACIÓN DE METADATOS (Fuera de \makeatletter si no llevan @)
+\title{\miTitulo}
+\author{\miAutor}
+
+\makeatletter
+\ifx\estilo\apa
+    \course{\miCurso \ - \miCodigoCurso}
+    \professor{\miTutor}
+    \affiliation{\miUniversidad\\\miEscuela}
+    \duedate{\miFecha}
+    \shorttitle{\miTituloCorto}
+\else
+    % Reasignamos el autor para IEEE con formato específico
+    \renewcommand{\@author}{\miAutor \\ \small \miEmail \\ \miUniversidad \\ \miCurso, Código: \miCodigoCurso}
+\fi
+\makeatother
+
+% 4. CUERPO DEL DOCUMENTO
+\begin{document}
+
+\ifx\estilo\apa
+	\shorttitle{\miTituloCorto}
+    \maketitle 
+\else
+    \maketitle 
+    \markboth{\miMarkBoth}
+\fi
+
+\input{sections/cuerpo.tex} 
+
+\printbibliography 
+
+\end{document}

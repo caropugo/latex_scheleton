@@ -1,0 +1,224 @@
+\section{Simulaciones y Cálculos}
+%\section{Códigos y Montajes}
+
+Para comprobar el correcto funcionamiento de cada una de las etapas requeridas para la implementación fincal se muestra el código de prueba y montaje para cada una de las etapas.
+
+\subsection{Montaje y código de cada etapa}
+
+\subsubsection{Pantalla LCD}
+
+La pantalla LCD con el conversor I2C utiliza dos señales (SDA en $A4$ y SCL en $A5$). En la Fig.~\ref{fig:montaje_LCD} se muestra el montaje para comprobar el correcto funcionamiento y mensaje del punto 1 de la metodología. Para este punto, se muestra un scroll de derecha a izquierda del mensaje inicial indicado en la guía del laboratorio. En el código~\ref{lst:i2c_scanner} se muestra el código que permite escanear los dispositivos I2C con Arduino para encontrar la dirección hexadecimal del módulo para la pantalla LCD, mientras que, para mostrar el mensaje en la pantalla LCD se utilizó el código~\ref{lst:lcd_i2c}.\\
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{montaje_LCD.png}
+    \caption{Montaje para utilizar la pantalla LCD $16 \times 2$ con conversor a protocolo I2C y Arduino~\parencite{NaylampLCD}.}
+    \label{fig:montaje_LCD}
+\end{figure}
+
+\vspace{5mm}
+
+\begin{lstlisting}[caption={La comunidad de Arduino ha creado este código para escanear la dirección hexadecimal I2C e identificarla de forma sencilla~\cite{ArduinoPlaygroundScanner}.}, label={lst:i2c_scanner}]
+#include <Wire.h>
+
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);
+  while (!Serial); // Esperar a que se abra el monitor serie
+  Serial.println("\nI2C Scanner");
+}
+
+void loop() {
+  byte error, address;
+  int nDevices;
+
+  Serial.println("Escaneando...");
+  nDevices = 0;
+  for(address = 1; address < 127; address++ ) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+
+    if (error == 0) {
+      Serial.print("Dispositivo I2C encontrado en la direccion 0x");
+      if (address<16) Serial.print("0");
+      Serial.print(address,HEX);
+      Serial.println("  !");
+      nDevices++;
+    }
+    else if (error==4) {
+      Serial.print("Error desconocido en la direccion 0x");
+      if (address<16) Serial.print("0");
+      Serial.println(address,HEX);
+    }    
+  }
+  if (nDevices == 0) Serial.println("No se encontraron dispositivos I2C\n");
+  else Serial.println("Hecho\n");
+  delay(5000); // Esperar 5 segundos para el siguiente escaneo
+}
+\end{lstlisting}
+
+\vspace{5mm}
+
+\begin{lstlisting}[caption={Ejemplo de código para utilizar una LCD de $16 \times 2$ con módulo de I2C en Arduino~\cite{NaylampLCD}.}, label={lst:lcd_i2c}]
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+//Crea el objeto lcd direccion 0x27 y 16 columnas x 2 filas
+LiquidCrystal_I2C lcd(0x27,16,2);  //
+
+void setup() {
+  // Inicializar el LCD
+  lcd.init();
+  
+  //Encender la luz de fondo.
+  lcd.backlight();
+  
+  // Se escribe el Mensaje en el LCD.
+  lcd.setCursor(1, 0);
+  lcd.print("Sistema Robotico Automatizado para");
+  lcd.setCursor(1, 1);
+  lcd.print("Procesos Ambientales, sensores");
+}
+
+void loop() {
+  //Se desplaza una posicion a la izquierda
+  lcd.scrollDisplayLeft(); 
+  delay(500);
+}
+\end{lstlisting}
+
+\subsubsection{Sensor de Gas}
+
+El sensor de Gas MQ135 tiene dos pines, uno digital y uno analógico. Para las lecturas se utilizará el segundo, de tal manera que se requiere hacer una conversión del rango de lecturas posibles $0$ a $1023$ al valor de la variable física medida. En la Fig.~\ref{fig:montaje_MQ135} se muestra el montaje para comprobar el correcto funcionamiento del sensor de gas MQ135 utilizando el código~\ref{lst:mq135}.\\
+
+
+\begin{lstlisting}[caption={Ejemplo de código para utilizar el sensor de gas MQ135 en Arduino~\cite{NaylampGas}.}, label={lst:mq135}]
+#define pin_mq  A0
+
+void setup() { 
+  Serial.begin(9600);
+  //pinMode(pin_mq, INPUT);
+}
+
+void loop() {
+  int adc_MQ = analogRead(pin_mq); //Leemos la salida analogica del MQ
+  float voltaje = adc_MQ * (5.0 / 1023.0); //Convertimos la lectura en un valor de voltaje
+  float Rs=1000*((5-voltaje)/voltaje);  //Calculamos Rs con un RL de 1k
+  double gas=0.4091*pow(Rs/5463, -1.497); // calculamos la concentracion de gas
+  //-------Enviamos los valores por el puerto serial------------
+  Serial.print("adc:");
+  Serial.print(adc_MQ);
+  Serial.print("    voltaje:");
+  Serial.print(voltaje);
+  Serial.print("    Rs:");
+  Serial.print(Rs);
+  Serial.print("    CO2:");
+  Serial.print(gas);
+  Serial.println("mg/L");
+  delay(2000);
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{montaje_MQ135.png}
+    \caption{Montaje para utilizar el pin analógico del sensor MQ135 y Arduino~\parencite{NaylampGas}.}
+    \label{fig:montaje_MQ135}
+\end{figure}
+
+
+\subsection{Sensor de Humedad y Temperatura}
+
+El sensor de humedad y temperatura DHT22 muestra su salida en un pin digital. En la Fig.~\ref{fig:montaje_DHT22} se muestra el montaje para comprobar el correcto funcionamiento del sensor de DHT22 utilizando el código~\ref{lst:dht22}.\\
+
+
+\begin{lstlisting}[caption={Ejemplo de código para utilizar el sensor de humedad y temperatura DHT22 en Arduino~\cite{NaylampDHT}.}, label={lst:dht22}]
+#include "DHT.h"
+
+#define DHTPIN 2     // Pin donde esta conectado el sensor
+//#define DHTTYPE DHT11   // Descomentar si se usa el DHT 11
+#define DHTTYPE DHT22   // Sensor DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Iniciando...");
+  dht.begin();
+}
+void loop() {
+  delay(2000);
+  float h = dht.readHumidity(); //Leemos la Humedad
+  float t = dht.readTemperature(); //Leemos la temperatura en grados Celsius
+  float f = dht.readTemperature(true); //Leemos la temperatura en grados Fahrenheit
+  //--------Enviamos las lecturas por el puerto serial-------------
+  Serial.print("Humedad ");
+  Serial.print(h);
+  Serial.print(" %t");
+  Serial.print("Temperatura: ");
+  Serial.print(t);
+  Serial.print(" *C ");
+  Serial.print(f);
+  Serial.println(" *F");
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{montaje_DHT22.png}
+    \caption{Montaje para utilizar el sensor DHT22 y Arduino~\parencite{NaylampDHT}.}
+    \label{fig:montaje_DHT22}
+\end{figure}
+
+
+\subsection{Montaje del Sistema completo}
+
+Para el montaje completo del sistema se integran el sensor de temperatura y humedad con salida digital que se conecta al pin 2 del Arduino; para el sensor de gas, se utiliza el pin analógico y se conecta al pin $A0$ del Arduino. Finalmente, el módulo I2C, que se conecta a la pantalla LCD de $16 \times 2$, se conecta a los pines $A4$ y $A5$ como se muestra en el pin out (Fig.~\ref{fig:pinout_arduino}) para los pines de $SDA$ y $SCL$. En la Fig.~\ref{fig:montaje_sistema} se muestra el montaje para todo el sistema, con la excepción del sensor de temperatura y humedad DHT22 porque no se encuentra el empaquetado en ThinkerCad; sin embargo, la salida digital del sensor se conecta en el pin digital 2 del Arduino como se 
+muestra en el montaje (ver simulación en \url{https://acortar.link/GKmEUe}~\parencite{sim_2026}). El código~\ref{lst:sistema} se utilizó para poner en funcionamiento todo el sistema.
+
+\begin{lstlisting}[caption={Código que implementa el sistema completo conformado por LCD $16 \times 2$ con I2C, sensor de gas MQ135, sensor de humedad y temperatura DHT22 y Arduino.}, label={lst:sistema}]
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+#include "DHT.h"
+
+#define DHTPIN 2 // Pin del sensor DHT
+#define DHTTYPE DHT22 // Sensor DHT22 o DHT11
+#define pin_mq  A0 // Pin del sensor MQ135
+
+DHT dht(DHTPIN, DHTTYPE);
+LiquidCrystal_I2C lcd(0x27,16,2); // direccion, columnas, filas
+
+void setup() {
+  lcd.init(); // Inicializar el LCD
+  lcd.backlight(); //Encender la luz de fondo.
+  dht.begin();
+}
+
+void loop() {
+  delay(2000);
+  lcd.clear();
+  float h = dht.readHumidity(); //Lee Humedad
+  float t = dht.readTemperature(); //Lee temp. C
+  float f = dht.readTemperature(true); //temp. F
+  int adc_MQ = analogRead(pin_mq); //Lee MQ
+  float voltaje = adc_MQ * (5.0 / 1023.0); // Valor de voltaje
+  float Res=1000*((5-voltaje)/voltaje);  //Calcula Rs con un RL de 1k
+  double CO2=0.4091*pow(Res/5463, -1.497); // calcula concentracion de CO2
+  lcd.setCursor(1, 0);
+  lcd.print("HUM: " + String(h) + " %t");
+  lcd.setCursor(1, 1);
+  lcd.print("TEM: " + String(t)+ " *C ");
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print("CO2: " + String(CO2) + "mg/L");
+}
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{montaje_sistema.png}
+    \caption{Montaje que implementa el sistema completo conformado por LCD $16 \times 2$ con I2C, sensor de gas MQ135, sensor de humedad y temperatura DHT22 y Arduino. El sensor DHT22 no viene dentro de los empaquetados de ThinkerCad, pero se conecta al pin 2 como se muestra en el montaje.}
+    \label{fig:montaje_sistema}
+\end{figure}
+

@@ -1,0 +1,29 @@
+\section{Materiales y Metodología}
+
+\subsection{Materiales}
+
+\begin{itemize}
+	\item Sistema embebido: Arduino, Raspberry Pi Pico, ESP32 o STM32.
+	\item Protoboard
+	\item Cables de conexión
+	\item Resistencias de distintos valores
+	\item Pantalla LCD 16x2 con I2C
+	\item Sensor de $CO_2$
+	\item Sensor de temperatura ambiente 
+	\item Sensor de humedad ambiente
+\end{itemize}
+
+\subsection{Metodología}
+
+El estudiante junto con su grupo de trabajo colaborativo va a seleccionar un sistema embebido (Arduino, Raspberry Pi Pico, ESP32 o STM32) que permita dar solución al problema: \textit{Integración de Robótica Autónoma en Sistemas de Automatización para Procesos Ambientales}.
+
+Se debe desarrollar la siguiente implementación:
+\begin{enumerate}
+	\item Conecte y configure una Pantalla LCD 16x2 con módulo conversor de paralelo a I2C, presentando el mensaje ``Sistema Robótico Automatizado para Procesos Ambientales, sensores'' realizando un scroll del texto de derecha a izquierda. 
+	\item Configure el sensor de $CO_2$ de tal forma que se presente el valor de la medición en la pantalla
+	LCD 16x2 I2C con su respectiva unidad de medida; integre en el mismo código a los sensores de 
+	temperatura y humedad, teniendo en cuenta las configuraciones correspondientes para cada uno de estos. 
+	Las tres magnitudes físicas se deben ver en la misma pantalla, puede ser de forma simultánea o con un 
+	retardo de tiempo entre estos, realice la toma de diez cambios significativos para las magnitudes 
+	físicas en una tabla con su respectiva evidencia, para el $CO_2$ puede apoyarse del gas de un briket.
+\end{enumerate}

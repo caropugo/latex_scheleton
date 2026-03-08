@@ -1,0 +1,9 @@
+\section{Análisis de Resultados}
+
+En el desarrollo de esta práctica se debe mencionar que la precisión del MQ135 es sensible a la temperatura y humedad, así como el tiempo que demora en disiparse el gas de la cámara. Por eso, el uso del DHT22 en el proyecto es excelente para justificar una futura compensación de error en las lecturas de gas. Adicionalmente, dado que el sensor es sensible a varios tipos de gas, no se puede tener una exactitud en las medidas sin tener un instrumento de medición calibrado que ofrezca valores de referencia para determinar la exactitud y precisión de los registros tomados.
+
+En cuanto al sensor DHT22, aunque tiene un mayor rango que el DHT11, es importante, al igual que en el cas del MQ135, tener un instrumento de medición calibrado que proporcione valores de referencia para determinar la exactitud y precisión de los datos obtenidos.
+
+Debido a la inercia térmica y química de las condiciones alcanzadas en el laboratorio, las variaciones de temperatura y concentración de gas registradas por los sensores utilizados son graduales. Es decir, se observa un gradiente suave en las mediciones, lo que permite aumentar el intervalo de tiempo entre cada muestra sin afectar significativamente los resultados.
+
+La tasa de muestreo utilizada entre las mediciones de cada variable fue de $4~[s]$, por lo que se descartaron datos registrados que pertenecían a grupos de datos redundantes debido a la dinámica lenta de las variables ambientales escogidas.
