@@ -1,0 +1,112 @@
+% Para edição da Equipe Physicae Organum:
+
+\setcounter{page}{7} % página inicial do artigo
+\def \tipoartigo {Editorial} % pode mudar para "Artigo convidado", "Semana da Física" etc.
+\def \tema {\vspace{-1.0em} \small Editoração \vspace{2ex} Científica} % pode mudar para "Artigo convidado", "Semana da Física" etc.
+\def \coordenadas {\textit{Physicae Organum}, v. 5, n. 1, p. 7-13, Brasília, 2019.}
+\def \paginainternet {http://periodicos.unb.br/index.php/physicae/index}
+
+% Marca d'água:
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Preprint}
+%\SetWatermarkScale{1}
+%\SetWatermarkColor[gray]{0.9}
+
+% Pacotes relacionados à parte gráfica do layout:
+
+\usepackage{tikz,everypage}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\definecolor{physorg}{RGB}{240,240,226}
+
+\tikzset{%
+  line numbers/.store in=\fakelinenos,
+  line numbers=45,
+  line number shift/.store in=\fakelinenoshift,
+  line number shift=0mm,
+  line number style/.style={text=gray},
+}
+
+% Para abreviar títulos longos no cabeçalho:
+
+\usepackage{truncate}
+
+% Para estilo elegante de cabeçalhos e rodapés:
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt} % para eliminar linha que separa cabeçalho
+
+\fancyhead[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[physorg] ($(current page.north west)+(0,-0.5cm)$) rectangle ($(current page.north east)+(0,-1.5cm)$);
+    \node[anchor=north west, font=\small, minimum size=1cm, inner xsep=10mm] (PO) at ($(current page.north west)+(0.0cm,-0.5cm)$) {\color{black} \coordenadas};
+\end{tikzpicture}
+}
+\fancyhead[RE]{
+}
+\fancyhead[LO]{
+}
+\fancyhead[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[physorg] ($(current page.north west)+(0,-0.5cm)$) rectangle ($(current page.north east)+(0,-1.5cm)$);
+    \node[anchor=north east, font=\small, minimum size=1cm, inner xsep=10mm] (PO) at ($(current page.north east)+(0.0cm,-0.5cm)$) {\truncate{\linewidth}{\tituloportugues}};
+\end{tikzpicture}
+}
+
+
+\fancyhead[C]{}
+\fancyfoot[C]{}
+
+\fancyfoot[LE]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[physorg] ($(current page.south west)+(0,0.5cm)$) rectangle ($(current page.south east)+(0,1.5cm)$);
+    \node[anchor=south west, text=black, font=\large\scshape, minimum size=.5in] at ($(current page.south west)+(0.5cm,0.4cm)$) {\thepage};
+    \node[anchor=south east, text=black, font=\small, minimum size=.5in] at ($(current page.south east)+(-0.5cm,0.4cm)$) {Universidade de Brasília};
+\end{tikzpicture}
+}
+\fancyfoot[RE]{}
+
+\fancyfoot[LO]{}
+\fancyfoot[RO]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[physorg] ($(current page.south west)+(0,0.5cm)$) rectangle ($(current page.south east)+(0,1.5cm)$);
+    \node[anchor=south west, text=black, font=\small, minimum size=.5in] at ($(current page.south west)+(0.5cm,0.4cm)$) {Instituto de Física};
+    \node[anchor=south east, text=black, font=\large, minimum size=.5in] at ($(current page.south east)+(-0.5cm,0.4cm)$) {\thepage};
+\end{tikzpicture}
+}
+
+\fancypagestyle{capa}
+{
+
+\fancyhead[C]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \node[anchor=north, font=\small, minimum size=0.8cm, inner xsep=5mm] (titPO) at ($(current page.north)+(0.0cm,-0.1cm)$) {\coordenadas};
+    \node[anchor=north, font=\small, minimum size=0.8cm, inner xsep=5mm] (titPO) at ($(current page.north)+(0.0cm,-0.55cm)$) {\color{black} Instituto de Física - Universidade de Brasília};
+    \fill[physorg] ($(current page.north west)+(0,-1.5cm)$) rectangle ($(current page.north east)+(-4cm,-2.5cm)$);
+    \node[anchor=north west, font=\large\scshape, minimum size=1cm, inner xsep=10mm] (logoPO) at ($(current page.north west)+(0.0cm,-0.5cm)$) {\includegraphics[width=2.0cm]{figs/logo-physicae-organum.png}};
+    \node[anchor=north west, font=\large\scshape, minimum size=0.8cm, inner xsep=5mm] (titPO) at ($(current page.north west)+(2.75cm,-1.55cm)$) {\color{black} PHYSIC{\AE} ORGANUM};
+    \node[anchor=south east, font=\large\scshape, minimum size=0.8cm, inner xsep=5mm] (secao) at ($(current page.north east)+(-4cm,-2.4cm)$) {\large \tipoartigo};
+    \fill[physorg]  ($(current page.north east)+(-3.5cm,-0.5cm)$) rectangle ($(current page.north east)+(-0.5cm,-2.5cm)$);
+    \node[text width=2.5cm, anchor=north west, font=\large\scshape, minimum size=0.8cm, inner xsep=5mm] (secao) at ($(current page.north east)+(-3.6cm,-0.8cm)$) {\begin{center} \color{black} \tema \end{center}};
+\end{tikzpicture}
+}
+
+\fancyhead[EL,OR]{}
+\fancyhead[ER]{}
+\fancyhead[OL]{}
+
+\fancyfoot[C]{
+\begin{tikzpicture}[overlay, remember picture]%
+    \fill[physorg] ($(current page.south west)+(0,0.5cm)$) rectangle ($(current page.south east)+(0,1.5cm)$);
+    \node[anchor=south west, text=black, font=\small, minimum size=.5in] at ($(current page.south west)+(0.5cm,0.4cm)$) {\href{\paginainternet}{\paginainternet}};
+    \node[anchor=south east, text=black, font=\large, minimum size=.5in] at ($(current page.south east)+(-0.5cm,0.4cm)$) {\thepage};
+\end{tikzpicture}
+}
+
+\fancyfoot[R]{}
+\fancyfoot[L]{}
+
+}

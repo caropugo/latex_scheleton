@@ -1,0 +1,79 @@
+% Método de entrada de texto (no código fonte):
+
+\usepackage[utf8]{inputenc}
+
+% Idiomas utilizados (o idioma principal vem por último):
+
+\usepackage[english,spanish]{babel}
+
+% Método de saída de texto (impressão em PDF):
+
+\usepackage[T1]{fontenc}
+
+% Geometria da página:
+
+\usepackage[hmarginratio=1:1,top=3cm,bottom=3cm,left=2cm,right=2cm,columnsep=20pt]{geometry}
+
+% Para recuo no primeiro parágrafo (no idioma inglês, não é costume recuar):
+
+\usepackage{indentfirst}
+
+% Microtipografia:
+
+\usepackage{microtype} 
+
+% Cores extras:
+
+\usepackage{xcolor}
+
+\definecolor{verde}{rgb}{0.2, 0.50, 0.25}
+
+% Para inclusão de figuras:
+
+\usepackage{graphics}
+\usepackage{graphicx}
+
+% Para mesclar linhas e colunas em tabelas:
+
+\usepackage{multirow}
+\usepackage{multicol}
+
+% Para controlar posição de elementos flutuantes (gráficos, tabelas etc.):
+
+\usepackage{float}
+
+% Distância relativa entre linhas:
+
+\linespread{1.05} 
+
+% Para formatação de autores e instituições:
+
+\usepackage{authblk}
+\usepackage[pdfborder={0 0 0},unicode]{hyperref}% For email addresses
+
+% Diversos:
+
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} 
+\usepackage{booktabs}
+\usepackage{paralist} 
+\usepackage{abstract} 
+\usepackage{titlesec} 
+\usepackage{pslatex}
+
+% Comandos de palavras-chave:
+
+\providecommand{\palabrasclave}[1]{\textbf{\indent\textit{Palabras clave:}} #1} % https://tex.stackexchange.com/a/137307/91816
+\providecommand{\keywords}[1]{\textbf{\indent\textit{Keywords:}} #1}
+
+% Formatação referente ao corpo do texto e cabeçalho.
+
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} 
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} 
+\renewcommand\thesection{\Roman{section}} 
+\renewcommand\thesubsection{\Roman{section}.\arabic{subsection}} 
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} 
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{}
+
+% Comando para adicionar fonte de figuras e semelhantes:
+
+\newcommand{\source}[1]{\captionsetup{singlelinecheck=false,justification=justified}\caption*{\footnotesize \noindent Fuente: {#1}}}
