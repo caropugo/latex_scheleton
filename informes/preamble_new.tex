@@ -1,13 +1,13 @@
 \usepackage[spanish]{babel} 
 \usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc} %Codificacion de fuente
-%\usepackage[latin1]{inputenc} %Codificacion de fuente
 \usepackage{comment}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{float}
+\usepackage[dvips,final]{epsfig}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{multirow}
@@ -26,9 +26,8 @@
 %\usepackage{graphics}
 \usepackage{lineno}
 \usepackage{ragged2e}
-\usepackage{setspace}
-\usepackage{lipsum}
-\usepackage{threeparttable}
+\usepackage{caption}
+\usepackage{siunitx}
 \usepackage{tikz}
 
 
@@ -70,7 +69,14 @@
     showstringspaces=false,
     frame=single,
     rulecolor=\color{black!10},
-    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 % Soporte español
+	literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+           {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+           {α}{{\ensuremath{\alpha}}}1 {β}{{\ensuremath{\beta}}}1 
+           {γ}{{\ensuremath{\gamma}}}1 {δ}{{\ensuremath{\delta}}}1
+           {λ}{{\ensuremath{\lambda}}}1 {π}{{\ensuremath{\pi}}}1
+           {Ω}{{\ensuremath{\Omega}}}1 {τ}{{\ensuremath{\tau}}}1
+	% Soporte español
 }
 
 % ESTILOS ESPECÍFICOS
@@ -99,12 +105,11 @@
     numbers=none
 }
 
-\makeatletter
-\ifx\estilo\apa
+% LÓGICA DINÁMICA APA vs IEEE
 	\usepackage{caption}
     % 1. Definimos un formato de caption con interlineado APA (1.5 o 2.0)
     \DeclareCaptionFormat{apa-listings}{
-        \textbf{#1#2} \\%[-0.3cm]
+        \textbf{#1#2} \\ [0.3cm]
         \textit{#3}
     }
     \captionsetup[lstlisting]{
@@ -123,58 +128,23 @@
         linewidth=1.0\linewidth,
         xleftmargin=0.04\linewidth,
     }
-\else
-	% Configuración para IEEE (Espacio sencillo y abajo)
-    %\captionsetup[lstlisting]{
-    %    font={small, stretch=1.0},
-    %    skip=5pt,
-    %    %justification=centering,
-    %    labelsep=period,
-    %}
-    \lstset{
-        style=base_style,
-        captionpos=b, 
-        basicstyle=\ttfamily\footnotesize,
-        lineskip=0pt,
-        linewidth=1.0\linewidth,
-        xleftmargin=0.05\linewidth,
-    }
-\fi
-\makeatother
 
 
-\providecommand{\inputpath}{./src/} % Carpeta sugerida para tus códigos
 \DeclareGraphicsExtensions{.pdf,.jpeg,.png,.eps}
 
 \graphicspath{ {./graphics/} {./img/} {./diagramas/} }
 
-%\makeatletter
-%\ifx\estilo\apa
-    % Configuración para APA7
-%    \renewcommand{\tablename}{Tabla}
-%    \renewcommand{\figurename}{Figura}
-%	\renewcommand\contentsname{\largeÍndice}
-%	\renewcommand{\listfigurename}{\largeÍndice de Figuras}
-%	\renewcommand{\listtablename}{\largeÍndice de Tablas}
-%	\renewcommand{\lstlistlistingname}{\largeÍndice de Códigos}
-%\else
-    % Configuración para IEEEtran
-    % IEEE usa \footnotesize y Versalitas por defecto, 
-    % esto asegura que se mantenga el estilo pero cambie el nombre.
-    %\renewcommand{\tablename}{Tabla}
-    %\renewcommand{\figurename}{Figura}
-    % Si el error persiste en IEEE, forzamos la redefinición de la macro de Babel
-    %\addto\captionsspanish{%
-    %  \def\tablename{Tabla}%
-    %  \def\figurename{Figura}%
-    %}
-%\fi
-%\makeatother
 
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\figurename}{Figura}
 \renewcommand{\refname}{Referencias Bibliográficas}
+\renewcommand{\figurename}{Figura}
 \renewcommand{\lstlistingname}{Código}
+
+\renewcommand\contentsname{\largeÍndice}
+\renewcommand{\listfigurename}{\largeÍndice de Figuras}
+\renewcommand{\listtablename}{\largeÍndice de Tablas}
+\renewcommand{\lstlistlistingname}{\largeÍndice de Códigos}
 
 \ifx\estilo\apa
     \par\medskip
@@ -182,6 +152,11 @@
     \renewcommand{\IEEEkeywordsname}{Palabras Clave}
 \fi
 
+\makeatletter
+\newcommand{\maybenewpage}{%
+  \ifx\estilo\apa \newpage \fi
+}
+\makeatother
 
 % --- ENTORNO PARA OBJETIVOS DINÁMICOS ---
 \newenvironment{misObjetivosEspecificos}{
