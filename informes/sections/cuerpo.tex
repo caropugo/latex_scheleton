@@ -11,7 +11,11 @@
 	\input{sections/contenido}
 	\newpage
 	\input{sections/conclusiones}
-	%\newpage
+	\newpage
+	\small \printbibliography
+	\newpage
+	\appendix
+	\input{sections/anexos}	
 \else
     \input{sections/abstract} 
 	\input{sections/introduccion}
@@ -23,6 +27,11 @@
 	%\input{sections/analisis}
 	\input{sections/contenido}
 	\input{sections/conclusiones}
+	\appendices
+	\input{sections/anexos}
+	\input{sections/agradecimientos}
+	{\small \printbibliography}
+	\input{sections/biografias}
 \fi
 
 

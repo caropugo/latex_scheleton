@@ -2,7 +2,7 @@
 
 \lipsum[4]
 
-Enla cita dentro del texto~\textcite{Wolf2017} y al final del texto~\parencite{Wolf2017}...
+Enla cita dentro del texto~\textcite{Wolf2017} y al final del texto~\parencite{Margolis2020}...
 
 \subsection{Punto 1}
 
@@ -10,19 +10,7 @@ Enla cita dentro del texto~\textcite{Wolf2017} y al final del texto~\parencite{W
 
 En la Figura~\ref{fig:punto1} se observa ....
 
-\begin{figure}[]
-    \caption{Imagen de ejemplo Punto 1.}
-    \label{fig:punto1}
-    \centering
-    \begin{threeparttable}
-	    \includegraphics[width=1.0\linewidth]{punto1.png}
-	    \begin{tablenotes}
-	        \small
-	        \item \textit{Nota.} Aquí puedes agregar una descripción adicional o la fuente de la imagen.
-	    \end{tablenotes}
-    \end{threeparttable}
-\end{figure}
-
+\insertarFigura{punto1.png}{1.0}{Imagen de ejemplo Punto 1.}{fig:punto1}
 
 \lipsum[6]
 
@@ -42,6 +30,27 @@ En la Tabla~\ref{tab:voltajes} se muestra....
 \end{table}
 
 \lipsum[7]
+
+\begin{table}[ht] 
+\caption{Performances as amplifier and rectifier at 10.1 GHz} %title of the table 
+\centering % centering table 
+\begin{tabular}{c rr  rr  } % creating eight columns 
+%\hline\hline %inserting double-line 
+\toprule
+ &\multicolumn{2}{c}{Amplifier} & \multicolumn{2}{c}{Rectifier}\\  
+Circuit &A&B&A&B\\ [0.25ex] 
+%\hline
+\midrule
+Max Efficiency(\%) & 67.87 & 56.47 & 64.40 & 63.94 \\  
+DC Power (mW) & 4186.0 & 5112.0 & 1671.0 & 3182.0\\ 
+RF Power (mW) & 3281.0$^{\mathrm{a}}$ & 3362.0 & 2594.0 & 4976.0\\  
+%\hline\hline
+\bottomrule
+\multicolumn{5}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
+\end{tabular} 
+\label{tab:hresult} 
+\end{table} 
+
 
 En el Código~\ref{cod:python_ejemplo} se muesta...
 

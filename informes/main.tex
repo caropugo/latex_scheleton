@@ -1,4 +1,4 @@
-\input{config.tex}
+\input{setup/config.tex}
 
 % 1. LÓGICA DE CLASE (Antes de cualquier otra cosa)
 \makeatletter
@@ -13,39 +13,62 @@
 \makeatother
 
 % 2. CARGA DE PAQUETES Y RECURSOS
-\input{preamble.tex}
+\input{setup/preamble.tex}
 \addbibresource{references.bib}
 
-% 3. ASIGNACIÓN DE METADATOS (Fuera de \makeatletter si no llevan @)
 \title{\miTitulo}
-\author{\miAutor}
 
-\makeatletter
+%\makeatletter
 \ifx\estilo\apa
-    \course{\miCurso \ - \miCodigoCurso}
+    \author{\autoresFinales}
+    \course{\miCurso \ - Código: \miCodigoCurso}
     \professor{\miTutor}
     \affiliation{\miUniversidad\\\miEscuela}
     \duedate{\miFecha}
     \shorttitle{\miTituloCorto}
 \else
-    % Reasignamos el autor para IEEE con formato específico
-    \renewcommand{\@author}{\miAutor \\ \small \miEmail \\ \miUniversidad \\ \miCurso, Código: \miCodigoCurso}
-\fi
-\makeatother
+    \author{\autoresFinales \\
+    \IEEEauthorblockA{\miCurso~(\miCodigoCurso), \miTutor}\\
+    %\IEEEauthorblockA{\miEscuela}\\% first affiliation
+    %\IEEEauthorblockA{\miUniversidad}\\
+    %\IEEEauthorblockA{email address or ORCID of corresponding author(s)}
+	\thanks{\thanksFinales}    
+    }
+    \markboth{\miMarkBoth}
+    %\markboth{UNAD, Microprocesadores y Microcontroladores 2026, 16-01. Informe de Laboratorio No. 1, \today.}
+	%{Pulido \MakeLowercase{\textit{et al.}}: Informe IEEE Microprocesadores y Microcontroladores}
+\fi	
+%\makeatother
 
 % 4. CUERPO DEL DOCUMENTO
 \begin{document}
 
 \ifx\estilo\apa
 	\shorttitle{\miTituloCorto}
-    \maketitle 
+    \maketitle
+	\pagenumbering{roman}
+	
+	%% Contenido
+	\tableofcontents
+	\setcounter{tocdepth}{2}
+	\newpage
+	%% Tablas
+	\listoftables
+	\newpage
+	%% Fíguras
+	\listoffigures
+	\newpage
+	%% Códigos	
+	\lstlistoflistings
+	\newpage
+	
+	\pagenumbering{arabic}
+	\setcounter{page}{2}
 \else
     \maketitle 
-    \markboth{\miMarkBoth}
+    %\markboth{\miMarkBoth}
 \fi
 
 \input{sections/cuerpo.tex} 
-
-\printbibliography 
 
 \end{document}

@@ -1,0 +1,40 @@
+% --- NO TOCAR --- 
+\def\apa{apa7} % <--- IMPORTANTE: Define el token de comparación
+\newcounter{contadorAutores}
+\setcounter{contadorAutores}{0}
+\newcommand{\registrarAutor}[3]{
+  \stepcounter{contadorAutores}
+  \expandafter\xdef\csname nombre\thecontadorAutores\endcsname{#1}
+  \expandafter\xdef\csname codigo\thecontadorAutores\endcsname{#2}
+  \expandafter\xdef\csname email\thecontadorAutores\endcsname{#3}
+}
+\newcommand{\totalIntegrantes}{\thecontadorAutores}
+% --- NO TOCAR --- 
+
+
+%% --- CONFIGURACIÓN DE ESTILO ---
+%% Comentar o descomentar las dos líneas para APA o IEEE
+%% Definición de APA
+%\def\estilo{apa7}
+%\def\subtipo{stu} % APA: stu, man, jou, doc
+%% Definición de IEEE
+\def\estilo{ieee}
+\def\subtipo{journal} % IEEE: journal, conference, technote, draftcls, peerreview
+
+% --- EDITAR: METADATOS DEL TRABAJO ---
+\newcommand{\miTitulo}{Tarea 1 - Reconocimiento de presaberes}
+\registrarAutor{Carolina Pulido}{1010203523}{crpulidog@unadvirtual.edu.co}
+\registrarAutor{Uriel Riveros}{1010203523}{crpulidog@unadvirtual.edu.co}
+\registrarAutor{Duván Rodríguez}{1010203523}{crpulidog@unadvirtual.edu.co}
+\newcommand{\miCurso}{Microprocesadores y Microcontroladores}
+\newcommand{\miCodigoCurso}{309696}
+\newcommand{\miTutor}{Paola Andrea Buitrago}
+\newcommand{\miUniversidad}{Universidad Nacional Abierta y a Distancia}
+\newcommand{\miEscuela}{Escuela de Ciencias Básicas, Tecnología e Ingeniería}
+\newcommand{\miPrograma}{Ingeniería Electrónica}
+\newcommand{\miFecha}{\today}
+\newcommand{\miTituloCorto}{} % Máximo 50 caracteres para APA
+%% The paper headers
+\newcommand{\miMarkBoth}{UNAD, \MakeUppercase{\miCurso} - 2026} % Máximo 50 caracteres para APA
+%\newcommand{\miMarkBoth}{SET International Journal of Broadcast Engineering - SET IJBE V.vv, 20xx}%
+%{Author N. One \MakeLowercase{\textit{et al.}}: Demo Paper for Submissions to SET IJBE

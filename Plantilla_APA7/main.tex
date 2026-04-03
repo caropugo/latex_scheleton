@@ -1,0 +1,123 @@
+% PLANTILLA APA7
+% Creado por: Isaac Palma Medina
+% Última actualización: 25/07/2021
+% @COPYLEFT
+
+% Fuentes consultadas (todos los derechos reservados):  
+% Normas APA. (2019). Guía Normas APA. https://normas-apa.org/wp-content/uploads/Guia-Normas-APA-7ma-edicion.pdf
+% Tecnológico de Costa Rica [Richmond]. (2020, 16 abril). LaTeX desde cero con Overleaf (1 de 3) [Vídeo]. YouTube. https://www.youtube.com/watch?v=kM1KvHVuaTY Weiss, D. (2021). 
+% Formatting documents in APA style (7th Edition) with the apa7 LATEX class. https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/apa7/apa7.pdf @COPYLEFT
+
+%+-+-+-+-++-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+
+
+% Preámbulo
+\documentclass[stu, 12pt, letterpaper, donotrepeattitle, floatsintext]{apa7}
+\usepackage[utf8]{inputenc}
+\usepackage{comment}
+\usepackage{marvosym}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+\usepackage[spanish]{babel} 
+\usepackage{lipsum}
+\selectlanguage{spanish}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{mibibliografia.bib} % Tu archivo de bibliografía
+\useunder{\uline}{\ul}{}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\addto\captionsspanish{\renewcommand{\listtablename}{Índice de tablas}}
+\addto\captionsspanish{\renewcommand{\lstlistlistingname}{Índice de códigos}}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+\addto\captionsspanish{\renewcommand{\lstlistingname}{Código}}
+
+\providecommand{\inputpath}{./src/} % Carpeta sugerida para tus códigos
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.eps}
+\graphicspath{ {./graphics/} }
+
+% Colores estilo "Dark Mode" suave o editor moderno
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{arduino_teal}{rgb}{0.0, 0.59, 0.62}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% ESTILO BASE (Con soporte de tildes incluido)
+\lstdefinestyle{base_style}{
+    backgroundcolor=\color{backcolour},   
+    numberstyle=\tiny\color{codegray},
+    basicstyle=\footnotesize\ttfamily,
+    breaklines=true,                 
+    numbers=left,                    
+    numbersep=7pt,
+    xleftmargin=10pt,                  
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black!10},
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+             {α}{{\ensuremath{\alpha}}}1 {β}{{\ensuremath{\beta}}}1 
+             {γ}{{\ensuremath{\gamma}}}1 {δ}{{\ensuremath{\delta}}}1
+             {λ}{{\ensuremath{\lambda}}}1 {π}{{\ensuremath{\pi}}}1
+             {Ω}{{\ensuremath{\Omega}}}1 {τ}{{\ensuremath{\tau}}}1
+	% Soporte español
+}
+
+% ESTILOS ESPECÍFICOS
+\lstdefinestyle{python_style}{
+    style=base_style,
+    language=Python,
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    stringstyle=\color{codepurple}
+}
+
+
+
+
+
+% Portada
+%\thispagestyle{empty}
+\title{\Large Título del documento}
+\author{Autor(a), Autor(a), Autor(a)} % (autores separados, consultar al docente)
+% Manera oficial de colocar los autores:
+%\author{Autor(a) I, Autor(a) II, Autor(a) III, Autor(a) X}
+\affiliation{Nombre de la institución}
+\course{Nombre del curso, Código del curso:}
+\professor{Nombre del docente}
+\duedate{Fecha}
+
+\begin{document}
+\maketitle
+
+
+% Índices
+\pagenumbering{roman}
+    % Contenido
+\tableofcontents
+\setcounter{tocdepth}{2}
+\newpage
+    % Tablas
+\listoftables
+\newpage
+    % Fíguras
+\listoffigures
+\newpage
+    %% Códigos	
+\lstlistoflistings
+\newpage
+
+% Cuerpo
+\pagenumbering{arabic}
+\setcounter{page}{2}
+
+\input{contenido/punto1}
+
+\newpage
+% Referencias
+\renewcommand\refname{\large\textbf{Referencias Bibliográficas}}
+\printbibliography
+
+\end{document}
