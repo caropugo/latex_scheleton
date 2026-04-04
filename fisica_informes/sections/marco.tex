@@ -1,0 +1,56 @@
+\section{Marco teórico}
+
+El marco teórico de cada práctica debe diseñarse bajo los diferentes contenidos abordados 
+en el experimento. Por ejemplo, si el contenido temático de la práctica es el diseño de 
+la ``Bobina de Tesla'' debe consultar referentes verídicos que expliquen el funcionamiento 
+desde la física del experimento~\parencite{cervantes1999}.
+
+Para el caso de las imágenes, tenga en cuenta las normas APA, tal como se presenta
+en la Figura 1, además recuerde que cualquier recurso fotográfico deberá citarlo previamente 
+en el cuerpo del documento.
+
+Recuerde que debe incluir cada gráfica el nombre de los ejes y el título, además que
+debe ser clara y entendible. Se recomienda el uso de software especializado como
+Python, Power BI o MATLAB para obtener las gráficas.
+
+\begin{table}[htbp]
+\centering
+\caption{Representación visual de las geometrías y ecuaciones de la Ley de Biot-Savart.}
+\label{tab:biot_visual}
+
+% Definimos columnas: 'l' para el nombre, 'X' para la imagen (se ajusta), 'm{3cm}' para la ecuación centrada verticalmente
+\begin{tabularx}{\linewidth}{l >{\centering\arraybackslash}m{5.0cm} X}
+\toprule
+\textbf{Geometría} & \textbf{Ecuación de $B(r)$} & \textbf{Diagramas} \\
+\midrule
+
+% FILA 1: Hilo Recto
+Hilo recto infinito & 
+% \raisebox ajusta la imagen verticalmente para que el texto de al lado quede centrado
+%\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{images/hilo_recto.png}} & 
+$B(r) = \frac{\mu_0 I}{2\pi r}$ &
+\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{imagen1.png}} \\ 
+\addlinespace[15pt] % Espacio extra entre filas
+
+% FILA 2: Lazo Circular (Centro)
+Espira circular (en el centro) & 
+%\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{images/lazo_circular_centro.png}} & 
+$B(r) = \frac{\mu_0 I}{2R}$ &
+\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{imagen1.png}} \\ 
+\addlinespace[15pt]
+
+% FILA 3: Solenoide
+Solenoide (bobina ideal) & 
+%\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{images/solenoide.png}} & 
+$B(r) = \mu_0 \frac{N}{L} I$ &
+\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{imagen1.png}} \\ 
+\addlinespace[15pt]
+
+% FILA 4: Lazo Circular (Eje)
+Eje del lazo circular & 
+%\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{images/lazo_circular_eje.png}} & 
+$B(r) = \frac{\mu_0 I}{2} \frac{R^2}{(x^2 + R^2)^{3/2}}$ &
+\raisebox{-.5\height}{\includegraphics[width=0.9\linewidth, height=2cm, keepaspectratio]{imagen1.png}} \\ 
+\bottomrule
+\end{tabularx}
+\end{table}

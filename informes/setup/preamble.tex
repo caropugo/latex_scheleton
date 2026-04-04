@@ -141,6 +141,20 @@
 	        \ifx\estilo\apa \par\vspace{2pt}\small \textit{Nota.} #5 \else \caption{#3} \label{#4} \fi
 	    \end{figure}
 	}
+	
+    %\lstset{captionpos=t} % APA 7: Título arriba
+    %\AtBeginEnvironment{lstlisting}{\captionsetup{labelfont=bf, textfont=it}}
+
+	\usepackage{caption}
+	\DeclareCaptionLabelSeparator{tightnewline}{\\[-1.5ex]}
+	
+	%\captionsetup[lstlisting]{
+	%    font=small,       % Tamaño típico para IEEE e APA
+    %		labelfont=bf,     % "Listing 1" en negrita
+	%    singlelinecheck=false,
+    	%	margin=0pt
+	%}
+	\captionsetup[lstlisting]{position=top, labelfont=bf, textfont=it, singlelinecheck=false, margin=0pt, labelsep=tightnewline}
 	%\usepackage{caption}
     %% 1. Definimos un formato de caption con interlineado APA (1.5 o 2.0)
     %\DeclareCaptionFormat{apa-listings}{
@@ -178,6 +192,11 @@
             \label{#4}
         \end{figure}
     }
+    %\captionsetup[lstlisting]{position=bottom, labelfont=sc} % Small caps para IEEE
+
+	% Si necesitas forzar el estilo de la fuente solo para la etiqueta del listing:
+	\usepackage{etoolbox}
+	\AtBeginEnvironment{lstlisting}{\captionsetup{labelfont=sc, textfont=it}}
     %\lstset{
     %    style=base_style,
     %    captionpos=b, 
@@ -189,6 +208,12 @@
 
 \fi
 %\makeatother
+
+\ifx\estilo\apa
+\else
+    \lstset{captionpos=b} % IEEE: Título abajo
+    \AtBeginEnvironment{lstlisting}{\captionsetup{labelfont=sc, textfont=rm}}
+\fi
 
 \addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
 \renewcommand{\lstlistingname}{Código}
